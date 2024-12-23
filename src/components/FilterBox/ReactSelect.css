@@ -1,0 +1,41 @@
+div .react-select__control {
+  background-color: var(--text-color-white);
+  border: none;
+  transition: var(--animation-cubicBezier);
+  border-radius: 14px !important;
+  overflow: hidden;
+}
+
+.react-select__input {
+  color: var(--text-color-main);
+}
+.react-select__menu .react-select__option--is-focused {
+  background-color: var(--text-color-white) !important;
+  color: var(--text-color-main);
+}
+.react-select__menu .react-select__option--is-selected {
+  background-color: var(--text-color-white) !important;
+  color: var(--text-color-main);
+  overflow: hidden;
+  border-radius: 14px !important;
+}
+
+.react-select__single-value,
+.react-select__option {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 14px !important;
+}
+
+.react-select__single-value {
+  position: relative;
+  z-index: 100;
+  border-radius: 14px;
+  color: var(--text-color-main) !important;
+}
+
+.react-select__menu {
+  overflow: hidden;
+  border-radius: 14px !important;
+}

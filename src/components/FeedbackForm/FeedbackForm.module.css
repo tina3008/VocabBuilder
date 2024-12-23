@@ -1,0 +1,105 @@
+.radioBlock {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.375;
+  margin-bottom: 40px;
+}
+
+.radioBlock label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.radioBlock input[type="radio"] {
+  display: none;
+}
+
+.radioBlock svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  fill: none;
+  border: 2px solid rgba(18, 20, 23, 0.2);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+
+.radioBlock input[type="radio"]:checked + svg {
+  border-color: var(--color1);
+  fill: var(--color1);
+}
+
+.radioBlock input[type="radio"]:checked + svg use {
+  href: "/sprite.svg#icon--RadioButtonOn";
+}
+
+.fieldBlock {
+  display: flex;
+  flex-direction: column;
+  row-gap: 18px;
+  margin-bottom: 40px;
+}
+
+.field {
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  padding: 16px 18px;
+  width: 472px;
+  height: 54px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.375;
+  color: #121417;
+}
+
+.field:hover,
+.field:focus,
+.field:active {
+  background-color: none;
+   outline: none;
+}
+.fieldPosition {
+  display: inherit;
+  width: 100%;
+  position: relative;
+}
+
+.errMessage {
+  color: red;
+    position: absolute;
+  top:50px;
+  left: 20px;
+}
+
+.submtBook {
+  background-color: var(--color1);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.375;
+  display: flex;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 215px;
+  width: 472px;
+}
+
+@media screen and (max-width: 767px) {
+  .fullform {
+    max-width: 320px;
+  }
+  .field {
+    max-width: 300px;
+  }
+  .submtBook {
+    max-width: 300px;
+    padding: 10px;
+  }
+  .radioBlock {
+    row-gap: 8px;
+  }
+}

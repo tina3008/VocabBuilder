@@ -1,0 +1,46 @@
+.nonContainer {
+  margin: 0 auto;
+  display: block;
+  color: var(--text-color);
+  font-family: "MacPaw Fixel Display";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  display: block;
+}
+
+.txt{
+  margin: 32px auto;
+}
+.linkHome{
+text-decoration: underline;
+
+padding: 10px;
+border-radius: 15px;
+
+}
+.linkHome:hover, .linkHome:focus{
+    background-color: var(--color_hover);
+}
+
+@media screen and (max-width: 767px) {
+ .nonContainer {
+    max-width: 300px;
+  }
+  
+}
+
+@media screen and (min-width: 768px) {
+   .nonContainer {
+    width: 704px;
+    
+  }  
+ 
+}
+
+@media screen and (min-width: 1440px) {
+  .nonContainer {
+    width: 1208px;
+  }
+ 
+}

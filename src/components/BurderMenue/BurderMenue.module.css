@@ -1,0 +1,88 @@
+@media screen and (max-width: 1439px) {
+  .burgerMenue {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: var(--color_hover);
+    z-index: 3000;
+    font-family: "MacPaw Fixel Display";
+    overflow: hidden;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 28px;
+  }
+.authBlock{
+  margin: 20px 80px 170px 32px;
+}
+  .link {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 15px;
+    border: none;
+    background-color: transparent;
+  }
+
+  .link:hover,
+  .link:focus {
+    border: none;
+
+    overflow: hidden;
+    background-color: var(--white);
+    color: var(--text-color-main);
+  }
+
+  .hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+}
+
+.burgerBtn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  stroke: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  right: 32px;
+}
+.img {
+  width: 498px;
+  height: 435px;
+}
+
+.imgBlock {
+  height: 435px;
+  width: 300px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+}
+
+
+@media screen and (min-width: 1440px) {
+  .burgerMenue {
+    display: none;
+  }
+}

@@ -1,0 +1,16 @@
+.btnmore {
+  background-color: var(--color1);
+  border-radius: 12px;
+  padding: 16px 48px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.55556;
+  color: var(--text-color-main);
+  border: none;
+  margin: 0 auto;
+}
+
+.btnmore:hover {
+  background: var(--color11);
+}

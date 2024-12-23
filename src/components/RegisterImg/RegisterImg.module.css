@@ -1,0 +1,92 @@
+.mainImg {
+  position: relative;
+  overflow: visible;
+}
+.imgRegister {
+  display: none;
+ 
+}
+.fon {
+  display: flex;
+
+  overflow: visible;
+  z-index: 10;
+  background-size: cover;
+}
+
+.imgTxt {
+  color: rgba(18, 20, 23, 0.8);
+  text-align: center;
+  font-family: "MacPaw Fixel Display";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 767px) {
+  .mainImg {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .imgfon {
+    display: none;
+  }
+  .imgRegister {
+    width: 247px;
+    height: 191px;
+    display: flex;
+    margin-bottom: 16px;
+  }
+  .imgTxt {
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mainImg {
+  }
+  .imgfon {
+    bottom: -281px;
+    right: -312px;
+    position: absolute;
+    display: block;
+    width: 693px;
+    height: 597px;
+    transform: rotate(24deg);
+    flex-shrink: 0;
+    background: linear-gradient(
+      287deg,
+      rgba(133, 170, 159, 0.51) 23.19%,
+      rgba(255, 255, 255, 0) 60.01%
+    );
+  }
+  .imgTxt {
+    margin-top: 98px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .mainImg {
+    width: 532px;
+    padding: 38px 0;
+  }
+  .imgRegister {
+    margin-bottom: 16px;
+    display: inline;
+    z-index: 100;
+  }
+  .imgfon {
+    display: flex;
+    position: absolute;
+    top: 200px;
+    left: 150px;
+    /* width: 563px;
+    height: 465px; */
+    transform: rotate(14deg);
+  }
+  .imgTxt {
+    margin-top: ;
+  }
+}

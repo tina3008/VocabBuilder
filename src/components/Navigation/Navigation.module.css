@@ -1,0 +1,184 @@
+.header {
+  display: block;
+  margin: 0 auto;
+}
+.wrapper {
+  display: flex;
+  padding: 20px 10px;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-family);
+  color: var(--text-color-main);
+  letter-spacing: -0.02em;
+}
+.navLogo {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* .fixedWrapper {
+  position: fixed;
+  background: var(--text-color-white);
+  z-index: 1000;
+  width: 320px;
+  align-items: center;
+  justify-content: space-between;
+} */
+.logo {
+  display: inline-flex;
+  column-gap: 8px;
+  transition: transform 0.3s ease;
+}
+.logo:hover,
+.logo:focus {
+  transform: scale(1.1);
+  text-decoration: underline;
+}
+
+.logoTxt {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.container {
+  display: none;
+}
+.rightBlock{
+display: inline-flex;
+justify-content: right;
+align-items: center;
+}
+
+.autentification {
+  display: inline-flex;
+  align-items: center;
+}
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.placeholder {
+  visibility: hidden;
+}
+
+.pageContainer {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-family: "MacPaw Fixel Display";
+}
+.link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color-main);
+  padding: 12px 20px;
+  background-color: transparent;
+  border: none;
+}
+
+.link:hover,
+.link:focus {
+  padding: 12px 20px;
+  border-radius: 15px;
+  background-color: var(--color_hover);
+  border: none;
+  overflow: hidden;
+  color: var(--white);
+}
+
+  .burgerBtn {
+    display: flex;    
+    border: none;
+    padding: 0;
+    background: transparent;
+    transition: transform 0.3s ease;
+    border: none;
+  }
+  .burgerBtn:hover,
+  .burgerBtn:focus,
+  .burgerBtn:active {
+    background: transparent;
+    transform: scale(1.1);
+  }
+  .burgerImage{
+    stroke: var(--text-color-main);
+    background-color: transparent;
+  }
+   .xImage {
+    stroke: var(--text-color-main);
+    background-color: aqua;
+    fill: black;
+    color: blue;
+   
+  }
+@media screen and (max-width: 767px) {
+  .no-scroll {
+    overflow: hidden;
+  }
+  .header {
+    max-width: 375px;  
+    justify-content: space-between;
+  }
+.wrapper {
+  padding: 16px;
+}
+.rightBlock{
+  gap:8px;
+}
+ 
+  .container {
+    display: none;
+  }
+  .autentification {
+    display: none;
+  }
+.burgerImage{
+width: 32px;
+height: 22px;
+}
+ 
+
+}
+@media screen and (min-width: 768px) {
+  .header {
+    width: 724px;
+  }
+  .rightBlock{
+  gap:28px;
+}
+.burgerImage{
+width: 40px;
+height: 28px;
+}
+}
+
+@media screen and (min-width: 1440px) {
+  .header {
+    width: 1260px;
+  }
+  .navLogo {
+    gap: 257px;
+  }
+  .authName {
+    max-width: 380px;
+  }
+  .burgerBtn {
+    display: none;
+  }
+  .container {
+    display: inline-flex;
+    column-gap: 28px;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,99 @@
+.wrapper {
+  display: inline-flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  font-family: "MacPaw Fixel Display";
+}
+
+.userConeiner {
+  display: inline-flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.username {
+  display: flex;
+  color: var(--text-color-main);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  justify-content: right;
+}
+.usernamerBurger {
+  color: var(--white);
+  display: flex;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  justify-content: right;
+  max-width: 100px;
+}
+.userImage {
+  border-radius: 30px;
+  background: var(--color_hover);
+  fill: rgba(252, 252, 252, 0.70);
+}
+.userImageBurger {
+  fill: var(--color_hover);
+  border-radius: 30px;
+  background-color: var(--white);
+  
+}
+
+.userImageFon {
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  border-radius: 50%;
+  background-color: var(--color_hover);
+  border: none;
+}
+.userImageFonBurger {
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  border-radius: 50%;
+  background-color: var(--white);
+  border: none;
+}
+
+.btn {
+  display: none;
+}
+
+@media screen and (min-width: 767px) {
+  .username {
+    width: 70px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .username {
+    width: 257px;
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .username {
+  }
+  .btn {
+    border: none;
+    background-color: transparent;
+    width: 81px;
+    font-family: "MacPaw Fixel Display";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+  }
+}

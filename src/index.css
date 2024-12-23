@@ -1,0 +1,100 @@
+@font-face {
+  font-family: "MacPaw Fixel Display";
+  src: url("fonts/FixelText/FixelText-SemiBold.otf") format("opentype"),
+    url("fonts/FixelText/FixelText-SemiBold.woff2") format("woff2"),
+    url("fonts/FixelText/FixelText-Bold.otf") format("opentype"),
+    url("fonts/FixelText/FixelText-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MacPaw Fixel Display";
+  src: url("fonts/FixelText/FixelText-Medium.woff2") format("woff2"),
+    url("fonts/FixelText/FixelText-Medium.otf") format("opentype"),
+    url("fonts/FixelText/FixelText-Regular.woff2") format("woff2"),
+    url("fonts/FixelText/FixelText-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SF Pro Display Light";
+  src: url("fonts/SFProDisplay-Light.woff2") format("woff2"),
+    url("fonts/SFProDisplay-Light.woff") format("woff"),
+    url("fonts/SFProDisplay-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SF Pro Regular";
+  src: url("fonts/SFPRODISPLAYREGULAR.OTF") format("opentype");
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --color_hover: #85aa9f;
+  --color_normal: #a5c0b8;
+  --white: #fcfcfc;
+  --white-1: #f8f8f8;
+  --backgroundForm: rgba(133, 170, 159, 0.1);
+  --text-color-main: #121417;
+  --text-color: rgba(18, 20, 23, 0.8);
+  --text-color-non-active: rgba(18, 20, 23, 0.1);
+  --text-color-active: "#85AA9F";
+
+  --color_error: #D80027;
+  --border-color_error: rgba(216, 0, 39, 1.0);
+  --color_success: #3CBF61;
+  --borderColor_success: rgba(60, 191, 97, 1.0);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  animation: none;
+  outline: none;
+  border: none;
+}
+ul {
+  list-style-type: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+}
+body {
+  margin: 0 auto;
+  box-sizing: border-box;
+}
