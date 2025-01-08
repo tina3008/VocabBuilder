@@ -1,30 +1,44 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { fetchWords, addWord, deleteWord } from "./operations";
-import { selectWords } from "./selectors";
-import { selectFilter } from "./selectors";
+import { allWords, addWord, deleteWord, fetchStatistics } from "./operations";
+import { selectWords, selectFilter, selectedWord } from "./selectors";
+
 import { logOut } from "../auth/operations";
 const wordsSlice = createSlice({
   name: "words",
   initialState: {
     items: [],
+    totalPage: "",
     loading: false,
     error: null,
+    allWords: {},
+    selectWord: null,
+    totalCount: null,
+    selectedWord: null,
+  },
+
+  reducers: {
+    setSelectedWord: (state, action) => {
+      state.selectedWord = action.payload;
+      console.log("setSelectedWord", action.payload);
+      
+    },
+    clearSelectedWord: (state) => {
+      state.selectedWord = null; 
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchWords.pending, (state) => {
+      .addCase(allWords.pending, (state) => {
         state.error = false;
         state.isLoading = true;
       })
-      .addCase(fetchWords.fulfilled, (state, action) => {    
+      .addCase(allWords.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload.map((word, index) => ({
-          id: word.id || index,
-          ...word,
-        }));
+        state.items = action.payload.results;
       })
-      .addCase(fetchWords.rejected, (state, action) => {
+
+      .addCase(allWords.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
@@ -56,6 +70,19 @@ const wordsSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
+      .addCase(fetchStatistics.pending, (state) => {
+        state.error = false;
+        state.isLoading = true;
+      })
+      .addCase(fetchStatistics.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.totalCount = action.payload;
+      })
+      .addCase(fetchStatistics.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       .addCase(logOut.fulfilled, (state) => {
         state.items = [];
         state.loading = false;
@@ -67,28 +94,22 @@ const wordsSlice = createSlice({
 export const visibleWords = createSelector(
   [selectWords, selectFilter],
   (words, filters) => {
-    if (!filters || !filters.values) {
-      return words;
-    }
+    const { word, category, verbType } = filters.values;
 
-    // return words.filter((word) => {
-    //   const { levels, languages, price_per_hour } = filters.values;
-    //   let matches = true;
+    return words.filter((wordItem) => {
+      const matchesWord = word
+        ? wordItem.en?.toLowerCase().includes(word.trim().toLowerCase())
+        : true;
 
-      // if (levels) {
-      //   matches = matches && teacher.levels.includes(levels);
-      // }
+      const matchesCategory = category ? wordItem.category === category : true;
 
-      // if (languages) {
-      //   matches = matches && teacher.languages.includes(languages);
-      // }
+      const matchesVerbType =
+        category === "verb" && verbType ? wordItem.verbType === verbType : true;
 
-      // if (price_per_hour) {
-      //   matches = matches && teacher.price_per_hour == price_per_hour;
-      // }
-
-    //   return matches;
-    // });
+      return matchesWord && matchesCategory && matchesVerbType;
+    });
   }
 );
+
 export const wordReducer = wordsSlice.reducer;
+export const { setSelectedWord, clearSelectedWord } = wordsSlice.actions;

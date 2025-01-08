@@ -14,12 +14,13 @@ export const fetchCategories = createAsyncThunk(
     }
   }
 );
-export const fetchWords = createAsyncThunk(
-  "words/fetchAll",
+
+export const allWords = createAsyncThunk(
+  "words/all",
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/words/all");
-      console.log("response.data", response.data);
+      console.log(response.data);
       
       return response.data;
     } catch (error) {
@@ -27,6 +28,7 @@ export const fetchWords = createAsyncThunk(
     }
   }
 );
+
 export const fetchWordsOwn = createAsyncThunk(
   "words/fetchOwn",
   async (_, thunkAPI) => {
@@ -79,9 +81,14 @@ export const deleteWord = createAsyncThunk(
 
 export const changeWord = createAsyncThunk(
   "words/changeWord",
-  async ({ id, name, number }, thunkAPI) => {
+  async ({ id, en, ua, category, isIrregular }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/words/edit/${id}`, { name, number });
+      const response = await axios.patch(`/words/edit/${id}`, {
+        en,
+        ua,
+        category,
+        isIrregular,
+      });
 
       return response.data;
     } catch (error) {
@@ -95,7 +102,9 @@ export const fetchStatistics = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/words/statistics");
-      return response.data;
+      console.log("stat=", response.data.totalCount);
+      
+      return response.data.totalCount;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

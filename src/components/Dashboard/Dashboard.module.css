@@ -1,0 +1,26 @@
+.dashBoardCower{
+display: flex;
+flex-direction: column;
+}
+
+@media screen and (max-width: 767px) {
+.dashBoardCower{
+row-gap: 40px;
+margin-bottom: 32px;
+}
+}
+@media screen and (min-width: 768px) {
+.dashBoardCower{
+row-gap: 28px;
+justify-content: flex-start;
+margin: 0px auto 28px;
+}
+}
+@media screen and (min-width: 1440px) {
+.dashBoardCower{
+flex-direction: row; 
+justify-content: space-between;
+align-items: center;
+
+}
+}

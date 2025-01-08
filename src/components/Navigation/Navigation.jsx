@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import css from "./Navigation.module.css";
 import BurderMenue from "../BurderMenue/BurderMenue";
 import { selectIsLoggedin, selectUser } from "../../redux/auth/selectors";
-
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import AuthFound from "./AuthFound/AuthFound";
@@ -23,7 +22,7 @@ export default function Navigation() {
       <div className={`${css.wrapper} ${menuOpen ? css.fixedWrapper : ""}`}>
         <div className={css.navLogo}>
           <NavLink to="/" className={css.logo}>
-            <svg className={css.logoImage} width="28" height="28">
+            <svg className={css.logoImage} >
               <use href="/sprite.svg#icon-Craftwork"></use>
             </svg>
             <p className={css.logoTxt}>LearnLingo</p>

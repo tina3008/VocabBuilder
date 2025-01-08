@@ -28,7 +28,6 @@ const authSlice = createSlice({
         state.refreshToken = action.payload.refreshToken;
         state.isLoading = false;
         state.isLoggedin = true;
-
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
@@ -51,6 +50,19 @@ const authSlice = createSlice({
 
         state.isLoggedin = true;
         state.isRefreshing = false;
+      })
+      .addCase(refreshUser.rejected, (state, action) => {
+        state.isRefreshing = false;
+        if (action.error.code === "ERR_BAD_REQUEST") {        
+          state.user = {
+            name: null,
+            email: null,
+          };
+          state.token = null;
+          state.isLoggedin = false;
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+        }
       }),
 });
 

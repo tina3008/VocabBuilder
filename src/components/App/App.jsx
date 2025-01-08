@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { PrivateRoute } from "../Navigation/RestrictedRoute.jsx";
+import { PrivateRoute, RestrictedRoute } from "../Navigation/RestrictedRoute.jsx";
 import { lazy, Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navigation from "../Navigation/Navigation.jsx";
@@ -50,27 +50,66 @@ export default function App() {
         {loading && <Loader />}
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/"
+              element={
+                <PrivateRoute
+                  component={<DictionaryPage />}
+                  redirectTo="/login"
+                />
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  component={<RegisterPage />}
+                  redirectTo="/dictionary"
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute
+                  component={<LoginPage />}
+                  redirectTo="/dictionary"
+                />
+              }
+            />
 
             <Route
               path="/"
               element={
-                <PrivateRoute component={<HomePage />} redirectTo="/register" />
+                <PrivateRoute component={<HomePage />} redirectTo="/login" />
               }
             />
             <Route
               path="/dictionary"
-              element={<PrivateRoute component={<DictionaryPage />} />}
+              element={
+                <PrivateRoute
+                  component={<DictionaryPage />}
+                  redirectTo="/login"
+                />
+              }
             />
             <Route
               path="/recommend"
-              element={<PrivateRoute component={<RecommendPage />} />}
+              element={
+                <PrivateRoute
+                  component={<RecommendPage />}
+                  redirectTo="/login"
+                />
+              }
             />
             <Route
               path="/training"
-              element={<PrivateRoute component={<TrainingPage />} />}
+              element={
+                <PrivateRoute
+                  component={<TrainingPage />}
+                  redirectTo="/login"
+                />
+              }
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

@@ -1,0 +1,51 @@
+.statisticBlock,
+.statisticBtn {
+  font-family: "MacPaw Fixel Display";
+  font-weight: 500;
+  line-height: 1.5;
+  display: inline-flex;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.statisitcTxt {
+  color: rgba(18, 20, 23, 0.5);  
+}
+
+.mainTxt {
+  color: var(--text-color-main);
+  width: 25px;
+  font-size: 20px;
+}
+
+.btnText {
+  font-family: "MacPaw Fixel Display";
+    font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-color-main);
+  background-color: transparent;
+  border: none;
+  gap: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  padding: 0;
+}
+@media screen and (max-width: 767px) {
+  .statisticBlock{
+    flex-direction: column;
+    row-gap: 8px;
+    justify-content: left;
+     align-items: start
+  }
+.statisitcTxt { 
+  font-size: 14px;
+}
+
+}
+@media screen and (min-width: 768px) {
+.statisitcTxt { 
+  font-size: 16px;
+}
+}

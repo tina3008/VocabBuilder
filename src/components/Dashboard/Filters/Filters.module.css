@@ -1,0 +1,103 @@
+.filtersBlock {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  font-family: "MacPaw Fixel Display";
+}
+.filterItem {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  position: relative;
+}
+.filterWord {
+  display: flex;
+  padding: 12px 24px;
+  justify-content: left;
+  align-items: center;
+  gap: 8px;
+  border-radius: 15px;
+  border: 1px solid var(--text-color-non-active);
+  color: var(--text-color-main);
+  font-family: "MacPaw Fixel Display";
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  background-color: transparent;
+  height: 48px;
+}
+.searchWord {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 14px;
+  right: 8px;
+}
+
+
+.wordBtnImg {
+  stroke: var(--text-color-main);
+  fill: transparent;
+  display: inline;
+}
+
+.radioPosition {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.customRadio {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(18, 20, 23, 0.2);
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.customRadio:checked {
+  border-color: var(--color_hover);
+}
+.customRadio:checked::before {
+  content: "";
+  position: absolute;
+  top: 3px; /* Отступ для создания расстояния */
+  left:3px;
+  width: 10px; /* Размер внутреннего круга */
+  height: 10px;
+  background-color: var(--color_hover); /* Цвет внутреннего круга */
+  border-radius: 50%; /* Круглая форма */
+}
+
+@media screen and (max-width: 767px) {
+  .filtersBlock {
+    flex-direction: column;
+    width: 100%;
+  }
+  .filterItem,
+  .filterWord,
+  .optionSize {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .filtersBlock {
+    flex-direction: row;
+    justify-content: left;
+  }
+  .optionSize {
+    width: 164px;
+  }
+  .filterWord {
+    width: 274px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .filtersBlock {
+  }
+}

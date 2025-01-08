@@ -1,0 +1,126 @@
+.formStyle {
+  display: flex;
+  flex-direction: column;
+  color: var(--white);
+  font-family: "MacPaw Fixel Display";
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  row-gap: 18px;
+}
+.fialdStyle {
+  position: relative;
+}
+.field {
+  width: 354px;
+  padding: 16px 18px;
+  border-radius: 15px;
+  border: 1px solid rgba(252, 252, 252, 0.3);
+  background-color: transparent;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  font-family: "MacPaw Fixel Display";
+}
+.field:hover,
+.field:focus,
+.field.active {
+  border: 1px solid rgba(252, 252, 252, 0.3);
+  overflow: hidden;
+  outline: 0;
+}
+.label {
+  display: inline-flex;
+  justify-content: left;
+  align-items: center;
+  column-gap: 4px;
+}
+.errField {
+  position: absolute;
+  color: var(--color_error);
+  left: 15px;
+  top: 37px;
+}
+
+.btnBlock{
+  display: inline-flex;
+justify-content: center;
+}
+.btnForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  font-family: "MacPaw Fixel Display";
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.56;
+  background-color: transparent;
+  border-radius: 30px;
+  border: 1px solid rgba(252, 252, 252, 0.4);
+}
+
+.btnForm:hover,
+.btnForm:focus,
+.btnForm.active {
+  border: none;
+  overflow: hidden;
+  outline: 0;
+  background: var(--white);
+  color: var(--text-color-main);
+}
+@media screen and (max-width: 767px) {
+  .fialdStyle{
+    display: flex;
+    flex-direction: column-reverse;
+    column-gap: 8px;
+  }
+  .flagImg {
+    width: 28px;
+    height: 28px;
+  }
+  .field {
+    width: 100%;
+    padding: 12px 24px;
+  }
+  .label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .btnBlock{
+ column-gap: 8px;  
+}
+  .btnForm {
+    width: 158px;
+    height: 48px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .flagImg {
+    width: 32px;
+    height: 32px;
+  }
+  .field {
+    width: 354px;
+    padding: 16px 18px;
+  }
+  .fialdStyle {
+    display: inline-flex;
+    column-gap: 32px;
+  }
+  .label {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+    .btnBlock{
+ column-gap: 10px;  
+}
+  .btnForm {
+    width: 245px;
+    height: 56px;
+  }
+}
+@media screen and (min-width: 1440px) {
+}

@@ -13,7 +13,7 @@ export default function AuthFound({ context }) {
     if (user?.name) {
       const timer = setTimeout(() => {
         setDisplayName(user.name);
-      }, 2000);
+      }, 1000);
 
       return () => clearTimeout(timer);
     }
