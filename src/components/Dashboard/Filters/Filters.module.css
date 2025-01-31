@@ -48,21 +48,30 @@
   align-items: center;
   gap: 8px;
 }
+.customAddWordRadio,
 .customRadio {
   appearance: none;
   width: 20px;
-  height: 20px;
-  border: 2px solid rgba(18, 20, 23, 0.2);
+  height: 20px; 
   border-radius: 50%;
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
 }
-
+.customRadio {
+   border: 2px solid rgba(18, 20, 23, 0.2);
+}
+.customAddWordRadio{
+  border: 2px solid var(--white);
+}
 .customRadio:checked {
   border-color: var(--color_hover);
 }
+.customAddWordRadio:checked {
+  border-color: var(--white);
+}
+
 .customRadio:checked::before {
   content: "";
   position: absolute;
@@ -71,7 +80,17 @@
   width: 10px; /* Размер внутреннего круга */
   height: 10px;
   background-color: var(--color_hover); /* Цвет внутреннего круга */
-  border-radius: 50%; /* Круглая форма */
+  border-radius: 50%; 
+}
+.customAddWordRadio:checked::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left:3px;
+  width: 10px; 
+  height: 10px;
+  background-color: var(--white); 
+  border-radius: 50%; 
 }
 
 @media screen and (max-width: 767px) {
@@ -81,7 +100,7 @@
   }
   .filterItem,
   .filterWord,
-  .optionSize {
+  .filtersCategory{
     width: 100%;
   }
 }
@@ -90,9 +109,9 @@
     flex-direction: row;
     justify-content: left;
   }
-  .optionSize {
+  .filtersCategory {
     width: 164px;
-  }
+  } 
   .filterWord {
     width: 274px;
   }

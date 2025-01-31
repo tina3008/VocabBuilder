@@ -1,16 +1,38 @@
-import css from "./AddWord.module.css";
 
+import css from "./AddWord.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addWordId } from "../../redux/words/operations";
+import { addWord, fetchCategories } from "../../redux/words/operations";
 import { selectActiveModal } from "../../redux/modal/selectors";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useEffect } from "react";
-import ModalWindow from "../ModalWindow/ModalWindow";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useId } from "react";
 import * as Yup from "yup";
 import { closeModal } from "../../redux/modal/slice";
+import Categories from "../Dashboard/Filters/Categories";
+import { CustomStylesAddWord } from "../Dashboard/Filters/CustomStylesAddWord";
+import Modal from "react-modal";
+
+const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(18, 20, 23, 0.20)",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    border: "none",
+    borderRadius: "30px",
+    background: "var(--color_hover)",
+    overflow: "visible",
+  },
+};
+
+Modal.setAppElement("#root");
 
 export const validationControl = Yup.object().shape({
   ua: Yup.string()
@@ -30,18 +52,23 @@ export default function AddWordModal() {
   const isModalOpen = activeModal === "addWordModal";
   const dispatch = useDispatch();
 
-  if (activeModal !== "addWordModal") return null;
-
   const uaFieldId = useId();
   const enFieldId = useId();
 
   const initialContact = {
     ua: "",
     en: "",
+    category: "",
+    isIrregular: "",
   };
 
   const handleSubmit = (values, actions) => {
-    dispatch(addWordId(values))
+    const dataToSubmit = { ...values };
+    if (dataToSubmit.category !== "verb") {
+      delete dataToSubmit.isIrregular;  
+    }
+
+    dispatch(addWord(dataToSubmit))
       .unwrap()
       .then(() => {
         toast("The word has been added", {
@@ -51,13 +78,14 @@ export default function AddWordModal() {
           },
           position: "top-center",
         });
+        handleClose();
       })
       .catch(() => {
         toast("Was error, please try again", {
           style: {
             background: "var(--color_error)",
-            color:"var(--white)"
-           },
+            color: "var(--white)",
+          },
           containerStyle: {
             top: 150,
             left: 20,
@@ -70,19 +98,50 @@ export default function AddWordModal() {
     actions.resetForm();
   };
 
-const handleClose = () => {
-  dispatch(closeModal());
+  const handleClose = () => {
+    dispatch(closeModal());
   };
-  
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+    };
+    if (activeModal) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeModal]);
+
   return (
     <>
-      <ModalWindow>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={handleClose}
+        style={customStyles}
+        className={css.modal}
+      >
+        <h3 className={css.title}>Add word</h3>
+        <p className={css.addWordTxt}>
+          Adding a new word to the dictionary is an important step in enriching
+          the language base and expanding the vocabulary.
+        </p>
         <Formik
           initialValues={initialContact}
           onSubmit={handleSubmit}
           validationSchema={validationControl}
         >
           <Form className={css.formStyle}>
+            <Categories
+              className={css.addWordModal}
+              CustomStyles={CustomStylesAddWord}
+              addRadio={true}
+            />
             <div className={css.fialdStyle}>
               <Field
                 className={css.field}
@@ -102,7 +161,6 @@ const handleClose = () => {
                 component="span"
               />
             </div>
-
             <div className={css.fialdStyle}>
               <Field
                 className={css.field}
@@ -137,7 +195,12 @@ const handleClose = () => {
             </div>
           </Form>
         </Formik>
-      </ModalWindow>
+        <button onClick={handleClose} className={css.btnX}>
+          <svg className={css.imgX}>
+            <use href="/sprite.svg#icon-x"></use>
+          </svg>
+        </button>
+      </Modal>
     </>
   );
 }

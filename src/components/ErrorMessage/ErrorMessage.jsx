@@ -5,7 +5,7 @@ export default function ErrorMessage() {
       <div className={css.noFound}>
         <p className={css.noFound}>
           Whoops, something went wrong! Please try reloading this page!
-        </p>txp
+        </p>
       </div>
     );
 }

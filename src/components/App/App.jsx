@@ -8,6 +8,7 @@ import { selectLoading, selectError } from "../../redux/words/selectors.js";
 import { HelmetProvider } from "react-helmet-async";
 import { refreshUser } from "../../redux/auth/operations.js";
 import { selectIsRefreshing } from "../../redux/auth/selectors.js";
+import TrainingWordId from "../TrainingWord/TrainingWord.jsx";
 
 const Homepage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const DictionaryPage = lazy(() =>
@@ -111,6 +112,9 @@ export default function App() {
                 />
               }
             />
+
+            <Route path="/training/:id" element={<TrainingWordId />}/>
+             
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

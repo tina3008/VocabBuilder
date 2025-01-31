@@ -1,0 +1,43 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 24px;
+  justify-content: left;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: left;
+  align-items: center;
+  column-gap: 8px;
+  color: var(--text-color-main);
+  font-family: "MacPaw Fixel Display";
+  font-weight: 500;
+  background-color: transparent;
+  border: none;
+  overflow: hidden;
+  padding: 0;
+}
+.btnImg{
+  display: flex;
+}
+@media screen and (max-width: 767px) {
+  .modal {
+    width: 117px;
+  }
+  .btn {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 124px;
+  }
+  .btn {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}

@@ -1,25 +1,32 @@
 import css from "./Statistics.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectStatistics } from "../../../redux/words/selectors";
+import { selectStatistics, selectedWord } from "../../../redux/words/selectors";
 import { fetchStatistics } from "../../../redux/words/operations";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { openModal } from "../../../redux/modal/slice";
 import AddWordModal from "../../AddWord/AddWord";
 import { selectActiveModal } from "../../../redux/modal/selectors";
+import ChangeWordModal from "../../AddWord/ChangeWordModal";
+import { useModalControl } from "../../hook/UseModalControl";
 
 export default function Statistics() {
+  const wordToChange = useSelector(selectedWord);
+
+  const { showModal, hideModal, isActive } = useModalControl();
   const dispatch = useDispatch();
   const statistics = useSelector(selectStatistics);
   const activeModal = useSelector(selectActiveModal);
 
+  const handleEdit = () => {
+    // hideModal();
+    if (activeModal !== "addWordModal") {
+      showModal("addWordModal");
+    }
+  };
+
   useEffect(() => {
     dispatch(fetchStatistics());
   }, [dispatch]);
-
-  const handleModalOpen = () => {
-    dispatch(openModal("addWordModal"));
-  };
 
   return (
     <div className={css.statisticBlock}>
@@ -27,12 +34,14 @@ export default function Statistics() {
         To study: <span className={css.mainTxt}>{statistics} </span>
       </p>
       <div className={css.statisticBtn}>
-        <button className={css.btnText} onClick={handleModalOpen}>
-          Add word
-          <svg className={css.imgBtn} width="20" height="20">
-            <use href="/sprite.svg#icon-plus"></use>
-          </svg>
-        </button>
+        {location.pathname === "/dictionary" && (
+          <button className={css.btnText} onClick={handleEdit}>
+            Add word
+            <svg className={css.imgBtn} width="20" height="20">
+              <use href="/sprite.svg#icon-plus"></use>
+            </svg>
+          </button>
+        )}
 
         <NavLink to="/training" className={css.btnText}>
           Train oneself
@@ -41,7 +50,11 @@ export default function Statistics() {
           </svg>
         </NavLink>
       </div>
-      {activeModal === "addWordModal" && <AddWordModal />}
+
+      {isActive("addWordModal") && <AddWordModal />}
+      {isActive("changeModal") && (
+        <ChangeWordModal wordToChange={wordToChange} />
+      )}
     </div>
   );
 }

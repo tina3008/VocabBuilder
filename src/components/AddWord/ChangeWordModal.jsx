@@ -1,13 +1,33 @@
 import css from "./AddWord.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { changeWord } from "../../redux/words/operations";
-import { selectActiveModal } from "../../redux/modal/selectors";
-import toast, { Toaster } from "react-hot-toast";
-import ModalWindow from "../ModalWindow/ModalWindow";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useId } from "react";
 import * as Yup from "yup";
 import { closeModal } from "../../redux/modal/slice";
+import { changeWord } from "../../redux/words/operations";
+import { selectActiveModal } from "../../redux/modal/selectors";
+import toast from "react-hot-toast";
+import Modal from "react-modal";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useEffect } from "react";
+
+const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(18, 20, 23, 0.20)",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    border: "none",
+    borderRadius: "30px",
+    background: "var(--color_hover)",
+    overflow: "visible",
+  },
+};
+
+Modal.setAppElement("#root");
 
 export const validationControl = Yup.object().shape({
   ua: Yup.string()
@@ -16,7 +36,7 @@ export const validationControl = Yup.object().shape({
     .max(20, "Too Long!")
     .required("Required"),
   en: Yup.string()
-    .matches(/\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/, "Invalid word format")
+    .matches(/^[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*$/, "Invalid word format")
     .min(2, "Too short")
     .max(20, "Too long")
     .required("Required"),
@@ -28,58 +48,77 @@ export default function ChangeWordModal({ wordToChange }) {
   const dispatch = useDispatch();
 
   if (activeModal !== "changeModal") return null;
+  if (!isModalOpen) {
+    return null;
+  }
 
   const { _id: id, en, ua, category, isIrregular } = wordToChange;
-  console.log("id, en, ua", id, en, ua, category, isIrregular);
-
 
   const initialContact = {
     ua: ua,
     en: en,
   };
 
-  const handleSubmit = (values) => {
-    const { en, ua } = values;
-    dispatch(changeWord({ id, en, ua, category, isIrregular }))
-      .unwrap()
-      .then(() => {
-        toast("The word has been changed", {
-          style: {
-            background: "var(--white)",
-            color: "var(---color_success)",
-          },
-          position: "top-center",
-        });
-      })
-      .catch(() => {
-        toast("Was error, please try again", {
-          style: {
-            background: "var(--color_error)",
-            color: "var(--white)",
-          },
-          containerStyle: {
-            top: 150,
-            left: 20,
-            bottom: 20,
-            right: 20,
-          },
-        });
+  
+const handleSubmit = (values, actions) => {
+  const { en, ua } = values;
+  dispatch(changeWord({ id, en, ua, category, isIrregular }))
+    .unwrap()
+    .then(() => {
+      toast("The word has been changed", {
+        style: {
+          background: "var(--white)",
+          color: "var(---color_success)",
+        },
+        position: "top-center",
       });
+    })
+    .catch(() => {
+      toast("Was error, please try again", {
+        style: {
+          background: "var(--color_error)",
+          color: "var(--white)",
+        },
+        containerStyle: {
+          top: 150,
+          left: 20,
+          bottom: 20,
+          right: 20,
+        },
+      });
+    });
 
-    actions.resetForm();
-  };
+  actions.resetForm();
+  dispatch(closeModal());
+};
 
   const handleClose = () => {
     dispatch(closeModal());
   };
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+    };
+    if (activeModal) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeModal]);
 
   return (
     <>
-      <ModalWindow>
-        <p>cng</p>
-        <p>
-          {id}, { en}, { ua}
-        </p>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={handleClose}
+        style={customStyles}
+        className={css.modal}
+      >
         <Formik
           initialValues={initialContact}
           onSubmit={handleSubmit}
@@ -87,11 +126,7 @@ export default function ChangeWordModal({ wordToChange }) {
         >
           <Form className={css.formStyle}>
             <div className={css.fialdStyle}>
-              <Field
-                className={css.field}         
-                type="text"
-                name="ua"
-              />
+              <Field className={css.field} type="text" name="ua" />
               <label name="ua" className={css.label}>
                 <svg className={css.flagImg}>
                   <use href="/sprite.svg#icon-ukraine"></use>
@@ -106,16 +141,12 @@ export default function ChangeWordModal({ wordToChange }) {
             </div>
 
             <div className={css.fialdStyle}>
-              <Field
-                className={css.field}            
-                type="text"
-                name="en"
-              />
+              <Field className={css.field} type="text" name="en" />
               <label name="en" className={css.label}>
                 <svg className={css.flagImg}>
                   <use href="/sprite.svg#icon-united-kingdom"></use>
                 </svg>
-                Ukrainian
+                English
               </label>
 
               <ErrorMessage
@@ -138,11 +169,13 @@ export default function ChangeWordModal({ wordToChange }) {
             </div>
           </Form>
         </Formik>
-      </ModalWindow>
+
+        <button onClick={handleClose} className={css.btnX}>
+          <svg className={css.imgX}>
+            <use href="/sprite.svg#icon-x"></use>
+          </svg>
+        </button>
+      </Modal>
     </>
   );
 }
-
-
-
-

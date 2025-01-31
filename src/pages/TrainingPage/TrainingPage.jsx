@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import css from "./TrainingPage.module.css";
+import { useSelector } from "react-redux";
+import TrainingRoom from "../../components/TrainingRoom/TrainingRoom";
 
 export default function TrainingPage() {
   return (
-    <section className={css.section}>
-      <p className={css.txtHome}>TrainingPage</p>
-    </section>
+    <div className={css.cowerPage}>
+      <div className={css.position}>
+        <div className={css.cowerTable}>
+          <TrainingRoom />
+        </div>
+      </div>
+    </div>
   );
 }

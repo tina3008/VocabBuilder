@@ -1,35 +1,40 @@
-export const CustomStylesFilters = (width) => ({
+export const CustomStylesAddWord = (width) => ({
   control: (provided, state) => ({
     ...provided,
-    overflow: "hidden",
-    border: "1px solid rgba(18, 20, 23, 0.10)",
+
+    border: " 1px solid rgba(252, 252, 252, 0.30)",
     boxShadow: "none",
     borderRadius: "15px",
     paddingRight: "8px",
     width: width,
     height: "48px",
+
     backgroundColor: "transparent",
+    "&:hover": {
+      border: " 1px solid rgba(252, 252, 252, 0.30)",
+    },
   }),
   valueContainer: (provided) => ({
     ...provided,
     padding: "0 8px",
     border: "none",
     backgroundColor: "transparent",
-    color: "var(--text-color-main)",
+    color: "var(--white)",
     "&:hover": {
       backgroundColor: "transparent",
-      color: "var(--text-color-main)",
+      color: "var(--white)",
       borderRadius: "15px",
     },
   }),
 
   menu: (provided) => ({
     ...provided,
-    borderRadius: "14px",
+    borderRadius: "15px",
     border: "2px solid #F8F8F8",
     owerflow: "hidden",
     boxShadow: "0px 4px 47px 0px rgba(18, 20, 23, 0.08)",
-    color: "var(--text-color-main)",
+
+    color: "rgba(18, 20, 23, 0.50);",
     "&:hover": {
       borderRadius: "15px",
     },
@@ -45,14 +50,14 @@ export const CustomStylesFilters = (width) => ({
   }),
   dropdownIndicator: (provided, state) => ({
     ...provided,
-    color: "var(--text-color-main)",
+    color: "var(--white)",
     padding: "0px",
-    "&:hover": {
-      color: "var(--text-color-main)",
-      backgroundColor: "transparent",
-    },
   }),
   indicatorSeparator: () => ({
     display: "none",
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "var(--white)",
   }),
 });

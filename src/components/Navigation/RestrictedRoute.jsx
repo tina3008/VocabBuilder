@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 
 export function RestrictedRoute({ component, redirectTo }) {
   const isLoggedin = useSelector(selectIsLoggedin);
-  console.log("isLoggedin - ", isLoggedin);
   
   return isLoggedin ? <Navigate to={redirectTo} /> : component;
 }

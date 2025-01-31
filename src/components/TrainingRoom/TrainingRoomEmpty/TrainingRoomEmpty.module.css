@@ -1,0 +1,158 @@
+.conteinerEmpty {
+  display: flex;
+  background-color: transparent;
+  flex-direction: column;
+}
+ .imgposition{
+    display: flex;
+    justify-content: center;
+   
+  }
+.textPart {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color-main);
+  font-family: "MacPaw Fixel Display";
+}
+.title {
+  font-weight: 500;
+  line-height: 1.5;
+}
+.text{
+  display: flex;
+  flex-wrap: wrap;
+  word-break:break-word
+}
+.btnCancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-family: "MacPaw Fixel Display";
+  background-color: transparent;
+}
+
+.btnAdd {
+  display: flex;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  background: var(--color_hover);
+  color: #fcfcfc;
+  font-family: "MacPaw Fixel Display";
+  font-weight: 700;
+  border: none;
+}
+.btnAdd:hover, 
+.btnAdd:focus, 
+.btnAdd:active{
+   border-radius: 30px;
+border: 1px solid var(--color_normal);
+background: var(--color_normal);
+color: var(--white);
+}
+.imgList{
+  display: flex;
+}
+@media screen and (max-width: 767px) {
+  .title {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  .text {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 132px;
+  }
+  .btnBlock {
+    display: block;
+  }
+  .btnCancel {
+    font-size: 16px;
+    color: rgba(18, 20, 23, 0.5);
+    border: none;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+.btnCancel:hover, 
+.btnCancel:focus, 
+.btnCancel:active{
+color: var(--text-color-main);
+}
+
+  .btnAdd {
+    font-size: 16px;
+    line-height: 1.5;
+    width: 100%;
+  }
+ 
+  .imgList{
+height: 202px;
+ margin: 43px  auto 33px auto;
+  }
+}
+@media screen and (min-width: 768px) {
+  .conteinerEmpty{
+    row-gap: 33px;
+  }
+  .title {
+    font-size: 20px;
+    margin-bottom: 32px;
+  }
+  .text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 64px;
+  }
+  .textPart {
+    width: 581px;
+  }
+
+  .btnBlock {
+    display: inline-flex;
+    gap: 10px;
+  }
+  .btnCancel {
+    font-size: 18px;
+    line-height: 1.5;
+    width: 203px;
+    height: 56px;
+    border: 1px solid var(--color_hover);
+    border-radius: 30px;
+    color: var(--color_hover);
+    font-size: 18px;
+    width: 203px;
+    height: 56px;
+    padding: 14px;
+  }
+  .btnCancel:hover, 
+.btnCancel:focus, 
+.btnCancel:active{
+   border-radius: 30px;
+border: 1px solid var(--color_hover);
+background: var(--color_hover);
+color: var(--white);
+}
+  .btnAdd {
+    width: 215px;
+    height: 56px;
+    font-size: 18px;
+  }
+    
+}
+@media screen and (min-width: 1440px) {
+    .conteinerEmpty{
+        flex-direction: row-reverse;
+        column-gap: 32px;
+        margin:95px auto 203px;
+        justify-content: center;
+        align-items: center;
+    }
+    .imgList{
+        height: 289px;
+        display: flex;
+    }
+}

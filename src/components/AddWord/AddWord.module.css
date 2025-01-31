@@ -1,3 +1,42 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  outline: 0;
+  
+    display: block !important;
+  visibility: visible !important;
+  z-index: 9999 !important;
+}
+
+.btnX {
+  padding: 0;
+  border: none;
+  position: absolute;
+  background-color: transparent;
+}
+.btnX:hover, .btnX:focus, .btnX:active{
+    background-color: transparent;
+outline: 0;
+}
+.imgX {
+  stroke: var(--white);
+}
+
+
+.title {
+  color: var(--white);
+  font-family: "MacPaw Fixel Display";
+  font-weight: 600;
+}
+
+.addWordTxt {
+  color: rgba(252, 252, 252, 0.8);
+  font-family: "MacPaw Fixel Display";
+  font-weight: 400;
+  line-height: 1.5;
+}
+
 .formStyle {
   display: flex;
   flex-direction: column;
@@ -34,7 +73,7 @@
   display: inline-flex;
   justify-content: left;
   align-items: center;
-  column-gap: 4px;
+  column-gap: 8px;
 }
 .errField {
   position: absolute;
@@ -43,9 +82,9 @@
   top: 37px;
 }
 
-.btnBlock{
+.btnBlock {
   display: inline-flex;
-justify-content: center;
+  justify-content: center;
 }
 .btnForm {
   display: flex;
@@ -70,8 +109,36 @@ justify-content: center;
   background: var(--white);
   color: var(--text-color-main);
 }
+
+.addWordModal {
+  color: var(--white);
+}
 @media screen and (max-width: 767px) {
-  .fialdStyle{
+  .modal {
+    padding: 48px 16px;
+    width: 343px;
+  }
+
+  .btnX {
+        top: 16px;
+    right: 16px;
+  }
+  .imgX {
+    width: 24px;
+    height: 24px;
+
+  }
+  .title {
+    font-size: 24px;
+    line-height: 1.67px;
+    letter-spacing: -0.48px;
+    margin-bottom: 16px;
+  }
+  .addWordTxt {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  .fialdStyle {
     display: flex;
     flex-direction: column-reverse;
     column-gap: 8px;
@@ -87,16 +154,46 @@ justify-content: center;
   .label {
     font-size: 14px;
     font-weight: 500;
+    margin-bottom: 8px;
   }
-  .btnBlock{
- column-gap: 8px;  
-}
+  .btnBlock {
+    column-gap: 8px;
+  }
   .btnForm {
     width: 158px;
     height: 48px;
   }
+.addWordModal{
+  width: 100%;
+}
 }
 @media screen and (min-width: 768px) {
+   .modal {
+    padding: 48px 64px;
+    width: 628px;
+  }
+  .imgX {
+    width: 32px;
+    height: 32px;
+
+  }
+  .btnX{
+    top: 20px;
+    right: 20px;
+  }
+  .title {
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    margin-bottom: 20px;
+  }
+  .addWordTxt {
+    font-size: 20px;
+    margin-bottom: 32px;
+  }
+  .addWordModal{
+    width: 204px;
+  }
   .flagImg {
     width: 32px;
     height: 32px;
@@ -114,13 +211,16 @@ justify-content: center;
     font-weight: 500;
     line-height: 1.5;
   }
-    .btnBlock{
- column-gap: 10px;  
-}
+  .btnBlock {
+    column-gap: 10px;
+  }
   .btnForm {
     width: 245px;
     height: 56px;
   }
 }
 @media screen and (min-width: 1440px) {
+   .modal {
+    padding: 64px;
+  }
 }

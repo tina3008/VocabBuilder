@@ -100,16 +100,9 @@
   justify-content: center;
 }
 
-/* .closeButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 32px;
-  background: none;
-  stroke: var(--text-color-main);
-  border: transparent;
-  owerhidden: none;
-} */
+.switchPageBtn:hover, .switchPageBtn:focus, .switchPageBtn:active{
+  color: var(--text-color-main);
+}
 
 @media screen and (max-width: 767px) {
   .registrationForm {

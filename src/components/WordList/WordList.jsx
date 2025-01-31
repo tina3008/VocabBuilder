@@ -1,28 +1,64 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, Component } from "react";
 import { useReactTable, getCoreRowModel } from "@tanstack/react-table";
 import css from "./WordList.module.css";
-import ChangeWordModal from "../AddWord/ChangeWordModal";
 import { openModal } from "../../redux/modal/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectActiveModal } from "../../redux/modal/selectors";
-import { setSelectedWord } from "../../redux/words/slice";
 import { selectedWord } from "../../redux/words/selectors";
+import AddDeleteModal from "../AddDeleteModal/AddDeleteModal";
+import { setSelectedWord } from "../../redux/words/slice";
+import { addWordId } from "../../redux/words/operations";
+import toast from "react-hot-toast";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export default function WordList({ filtrWords }) {
   const dispatch = useDispatch();
   const activeModal = useSelector(selectActiveModal);
   const wordToChange = useSelector(selectedWord);
+  const choiceWord = useSelector(addWordId);
 
-  const handleModalOpen = (row) => {
-    dispatch(openModal("changeModal"));
-    dispatch(setSelectedWord(row.original));
-    console.log("wordToChange", wordToChange);
-    console.log("activeModal", activeModal);
+  const handleModalOpen = (event, row) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const position = {
+      top: rect.top + 65,
+      left: rect.left - 20,
+    };
+
+    const wordToSelect = { ...row.original, position };
+    dispatch(setSelectedWord(wordToSelect));
+    dispatch(openModal("addDelModal"));
   };
-  useEffect(() => {
-    console.log("Current activeModal:", activeModal);
-    console.log("Current wordToChange:", wordToChange);
-  }, [activeModal, wordToChange]);
+
+  const handleChoiceWord = (row, actions) => {
+    const wordToSelect = { ...row.original };
+    dispatch(addWordId(wordToSelect._id))
+      .unwrap()
+      .then(() => {
+        toast("The word has been added", {
+          style: {
+            background: "var(--white)",
+            color: "var(---color_success)",
+          },
+          position: "top-center",
+        });
+        handleClose();
+      })
+      .catch(() => {
+        toast("Was error, please try again", {
+          style: {
+            background: "var(--color_error)",
+            color: "var(--white)",
+          },
+          containerStyle: {
+            top: 150,
+            left: 20,
+            bottom: 20,
+            right: 20,
+          },
+        });
+      });
+  };
 
   const columns = useMemo(
     () => [
@@ -48,16 +84,85 @@ export default function WordList({ filtrWords }) {
           </div>
         ),
       },
-      { accessorKey: "category", header: "Category" },
-      { accessorKey: "progress", header: "Progress" },
+
+      {
+        accessorKey: "category",
+        header: () => (
+          <h3
+            className={
+              location.pathname === "/dictionary"
+                ? css.dictionaryHeader
+                : css.recommendHeader
+            }
+          >
+            Category
+          </h3>
+        ),
+        cell: ({ row }) => (
+          <p
+            className={
+              location.pathname === "/dictionary"
+                ? css.dictionaryCategory
+                : css.recomendCategory
+            }
+          >
+            {row.original.category}
+          </p>
+        ),
+      },
+
+      ...(location.pathname === "/dictionary"
+        ? [
+            {
+              accessorKey: "progress",
+              header: "Progress",
+              cell: ({ row }) => (
+                <div className={css.progress}>
+                  <p className={css.progressTxt}> {row.original.progress}%</p>
+                  <div className={css.progressRing}>
+                    <CircularProgressbar
+                      value={row.original.progress}
+                      strokeWidth={15}
+                      styles={buildStyles({
+                        strokeLinecap: "round",
+                        pathTransitionDuration: 0.8,
+                        pathColor: `rgba(43, 214, 39, ${
+                          row.original.progress / 100
+                        })`,
+                        trailColor: "#D4F8D3",
+                      })}
+                    />
+                  </div>
+                </div>
+              ),
+            },
+          ]
+        : []),
+
       {
         accessorKey: "actions",
         header: "",
-        cell: ({ row }) => (
-          <button className={css.tableBtn} onClick={() => handleModalOpen(row)}>
-            ...
-          </button>
-        ),
+        cell: ({ row }) =>
+          location.pathname === "/dictionary" ? (
+            <button
+              className={css.tableBtn}
+              onClick={(e) => handleModalOpen(e, row)}
+            >
+              ...
+            </button>
+          ) : (
+            <button
+              className={css.tableBtn}
+              onClick={() => handleChoiceWord(row)}
+            >
+              <div className={css.tableAddBtn}>
+                <p className={css.tableBtnTxt}>Add to dictionary</p>
+                <svg className={css.imgBtnTxt} width="20" height="20">
+                  <use href="/sprite.svg#icon-arrow" />
+                </svg>
+              </div>
+            </button>
+          ),
       },
     ],
     []
@@ -74,10 +179,12 @@ export default function WordList({ filtrWords }) {
   if (!filtrWords || filtrWords.length === 0) {
     return <p>No data available</p>;
   }
+  const tableClass =
+    location.pathname === "/dictionary" ? css.dictionary : css.recomend;
 
   return (
     <>
-      <table className={css.table}>
+      <table className={`${css.table} ${tableClass}`}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -105,11 +212,9 @@ export default function WordList({ filtrWords }) {
           ))}
         </tbody>
       </table>
-      {activeModal === "changeModal" && wordToChange && (
-        <ChangeWordModal wordToChange={wordToChange} />
+      {activeModal === "addDelModal" && wordToChange && (
+        <AddDeleteModal wordToChange={wordToChange} />
       )}
     </>
   );
 }
-
-

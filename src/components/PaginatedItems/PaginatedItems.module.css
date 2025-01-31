@@ -1,0 +1,40 @@
+.paginationBlock{
+    display: inline-flex;
+    column-gap: 10px;
+}
+.pagination{
+    display: inline-flex;
+    justify-content: center;
+    column-gap: 10px;
+    color: var(--text-color-main);
+font-family: "MacPaw Fixel Display";
+font-size: 13px;
+font-weight: 600;
+
+}
+.pageButton:active,
+.pageButton:hover,
+.pageButton:focus,
+.pageButton,
+.previousClassName,
+.nextClassName,
+.pageClassName{
+    width: 32px;
+height: 32px;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 8px;
+border: 1px solid rgba(18, 20, 23, 0.10);
+background-color: transparent;
+}
+
+.activeClassName{
+
+background: #85AA9F;
+color: var(--fff);
+}
+
+.previousClassName{
+
+}

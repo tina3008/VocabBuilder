@@ -1,8 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-
-
 export const fetchCategories = createAsyncThunk(
   "words/categories",
   async (_, thunkAPI) => {
@@ -17,11 +15,10 @@ export const fetchCategories = createAsyncThunk(
 
 export const allWords = createAsyncThunk(
   "words/all",
-  async (_, thunkAPI) => {
+  async (page = 1, thunkAPI) => {
     try {
-      const response = await axios.get("/words/all");
-      console.log(response.data);
-      
+      const response = await axios.get(`/words/all?page=${page}`);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -31,9 +28,9 @@ export const allWords = createAsyncThunk(
 
 export const fetchWordsOwn = createAsyncThunk(
   "words/fetchOwn",
-  async (_, thunkAPI) => {
+  async (page = 1, thunkAPI) => {
     try {
-      const response = await axios.get("/words/own");
+      const response = await axios.get(`/words/own?page=${page}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -41,9 +38,8 @@ export const fetchWordsOwn = createAsyncThunk(
   }
 );
 
-
 export const addWord = createAsyncThunk(
-  "words/addWord",
+  "words/create",
   async (newContact, thunkAPI) => {
     try {
       const response = await axios.post("/words/create", newContact);
@@ -56,9 +52,9 @@ export const addWord = createAsyncThunk(
 
 export const addWordId = createAsyncThunk(
   "words/addWordId",
-  async (newContact, thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
-      const response = await axios.post(`/words/add/${id}`, newContact);
+      const response = await axios.post(`/words/add/${id}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -66,13 +62,12 @@ export const addWordId = createAsyncThunk(
   }
 );
 
-
 export const deleteWord = createAsyncThunk(
   "words/deleteWord",
   async (id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/words/delete/${id}}`);
-      return response.data;
+      const response = await axios.delete(`/words/delete/${id}`);
+      return { _id: response.data.id };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -89,7 +84,6 @@ export const changeWord = createAsyncThunk(
         category,
         isIrregular,
       });
-
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -102,8 +96,6 @@ export const fetchStatistics = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/words/statistics");
-      console.log("stat=", response.data.totalCount);
-      
       return response.data.totalCount;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -112,10 +104,35 @@ export const fetchStatistics = createAsyncThunk(
 );
 
 export const fetchTasks = createAsyncThunk(
-  "words/tasks",
-  async (_, thunkAPI) => {
+  "words/fetchTasks",
+  async (_, { getState }) => {
+    const { auth } = getState();
+    const token = auth.token;
+
+    if (!token) {
+      throw new Error("No authentication token found.");
+    }
+
+    const response = await axios.get(
+      "https://vocab-builder-backend.p.goit.global/api/words/tasks",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  }
+);
+
+export const fetchAnswers = createAsyncThunk(
+  "words/answers",
+  async (word, thunkAPI) => {
+
     try {
-      const response = await axios.get("/words/tasks");
+      const response = await axios.post("/words/answers", word);
+      console.log("response.data", response.data);
+      
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -123,12 +140,26 @@ export const fetchTasks = createAsyncThunk(
   }
 );
 
-export const fetchAnswers = createAsyncThunk(
-  "words/answers",
-  async (_, thunkAPI) => {
+export const fetchWordById = createAsyncThunk(
+  "words/fetchWordById",
+  async (id, thunkAPI) => {
     try {
-      const response = await axios.get("/words/answers");
+      const response = await axios.get(`/words/tasks/${id}`);
+
       return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchAllOwnWords = createAsyncThunk(
+  "words/fetchAllOwnWords",
+  async (wordId, thunkAPI) => {
+    try {
+      const response = await axios.get(`/words/own?page=1&limit=1000`);
+
+      return response.data.results;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
