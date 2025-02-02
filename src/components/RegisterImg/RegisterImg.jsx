@@ -10,7 +10,7 @@ export default function RegisterImg() {
       />
       <div className={css.imgfon}>   
       </div>
-      <p className={css.imgTxt}>Word · Translation · Grammar · Progress</p>
+      {location.pathname === "/login" && (<p className={css.imgTxt}>Word · Translation · Grammar · Progress</p>)}
     </div>
   );
 }

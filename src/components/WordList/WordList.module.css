@@ -97,7 +97,7 @@
 
 @media screen and (max-width: 767px) {
   .table {
-    width: 343px;
+    max-width: 343px;
   }
   .progressTxt {
     display: none;
@@ -120,19 +120,19 @@
   }
   .dictionary th:nth-child(1),
   .dictionary td:nth-child(1) {
-    width: 82px;
+    max-width: 82px;
   }
   th:nth-child(2),
   td:nth-child(2) {
-    width: 116px;
+    max-width: 116px;
   }
   .dictionary th:nth-child(4),
   .dictionary td:nth-child(4) {
-    width: 95px;
+    max-width: 95px;
   }
   .dictionary th:nth-child(5),
   .dictionary td:nth-child(5) {
-    width: 50px;
+    max-width: 50px;
   }
 
   .recommendHeader,
@@ -146,15 +146,15 @@
   }
   .recomend th:nth-child(1),
   .recomend td:nth-child(1) {
-    width: 90px;
+    max-width: 90px;
   }
   .recomend th:nth-child(3),
   .recomend td:nth-child(3) {
-    width: 99px;
+    max-width: 99px;
   }
   .recomend th:nth-child(4),
   .recomend td:nth-child(4) {
-    width: 38px;
+    max-width: 38px;
     padding: 14px 9px;
   }
 }

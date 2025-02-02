@@ -58,7 +58,13 @@
   font-weight: 500;
   line-height: 1.5;
 }
-
+.input:hover,
+.input:focus,
+.input.active{
+  border: none;
+  padding: 2px 6px;
+  outline: 0;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -124,7 +130,7 @@
 
 @media screen and (max-width: 767px) {
   .position {
-    width: 375px;
+    max-width: 375px;
     padding: 24px 16px 48px 16px;
   }
   .studyCower {
@@ -134,6 +140,7 @@
   .input {
     font-size: 16px;
   }
+
   .study {
     height: 195px;
     position: relative;
@@ -155,12 +162,13 @@
   .buttonBlock {
     position: fixed;
     display: block;
-    /* bottom: -311px; */
     top: 650px;
     z-index: 1000;
-
-    width: 343px;
-    left: 16px;
+   width: inherit;
+   max-width: 343px;
+padding: 0 16px;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .btnCancel {
     font-size: 16px;
@@ -176,6 +184,7 @@
   }
 
   .btnAdd {
+ 
     font-size: 16px;
     line-height: 1.5;
     width: 100%;

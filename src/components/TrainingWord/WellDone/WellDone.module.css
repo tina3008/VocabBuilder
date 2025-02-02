@@ -58,7 +58,7 @@ line-height: 1.5;
 @media screen and (max-width: 767px) {
   .modal {
     padding: 48px 16px;
-    width: 343px;
+    max-width: 343px;
   }
 
   .btnX {

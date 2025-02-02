@@ -19,7 +19,7 @@ width: 100%;
 }
 @media screen and (max-width: 767px) {
 .position{
-width: 375px;
+max-width: 375px;
 padding: 32px 16px 48px 16px;
 }
 .cowerTable{
