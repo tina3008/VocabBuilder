@@ -9,13 +9,15 @@ const modalSlice = createSlice({
     openModal: (state, action) => {
       console.log("Opening modal:", action.payload);
       state.activeModal = action.payload;
-      
     },
     closeModal: (state) => {
       state.activeModal = null;
     },
+    setModalData: (state, action) => {
+      state.modalData = action.payload;
+    },
   },
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const { openModal, closeModal, setModalData } = modalSlice.actions;
 export const modalReducer = modalSlice.reducer;

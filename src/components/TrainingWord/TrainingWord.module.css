@@ -138,7 +138,7 @@
     height: 195px;
     position: relative;
     padding-bottom: 18px;
-    z-index: 100;
+    z-index: 0;
     overflow: visible;
   }
   .langName {

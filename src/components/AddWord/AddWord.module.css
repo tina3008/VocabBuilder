@@ -113,6 +113,11 @@ outline: 0;
 .addWordModal {
   color: var(--white);
 }
+.textDone{
+  display: inline-flex;
+  column-gap: 64px;
+}
+
 @media screen and (max-width: 767px) {
   .modal {
     padding: 48px 16px;
@@ -218,6 +223,7 @@ outline: 0;
     width: 245px;
     height: 56px;
   }
+
 }
 @media screen and (min-width: 1440px) {
    .modal {
