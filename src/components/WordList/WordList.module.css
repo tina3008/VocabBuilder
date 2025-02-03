@@ -96,8 +96,8 @@
 }
 
 @media screen and (max-width: 767px) {
-  .table {
-    max-width: 343px;
+  .progress{
+    justify-content: center;
   }
   .progressTxt {
     display: none;
@@ -105,6 +105,7 @@
   .progressRing {
     height: 24px;
     width: 24px;
+ 
   }
   .tableBtnTxt {
     display: none;
@@ -117,6 +118,32 @@
   .table td {
     font-size: 14px;
     padding: 16px 14px 10px 16px;
+  }
+
+  .recommendHeader,
+  .dictionaryHeader {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .table > thead > tr > th:nth-child(3):has(.dictionaryHeader),
+  .table > tbody > tr > td:nth-child(3):has(.dictionaryCategory) {
+    display: none;
+  }
+
+  .recomend th:nth-child(4),
+  .recomend td:nth-child(4) {
+    padding: 14px 9px;
+  }
+}
+@media screen and (max-width: 374px) {
+  .table {
+    max-width: 343px;
+  }
+  .table th {
+    padding: 16px 8px 16px 8px;
+  }
+  .table td {
+    padding: 16px 8px 10px 8px;
   }
   .dictionary th:nth-child(1),
   .dictionary td:nth-child(1) {
@@ -134,16 +161,6 @@
   .dictionary td:nth-child(5) {
     max-width: 50px;
   }
-
-  .recommendHeader,
-  .dictionaryHeader {
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .table > thead > tr > th:nth-child(3):has(.dictionaryHeader),
-  .table > tbody > tr > td:nth-child(3):has(.dictionaryCategory) {
-    display: none;
-  }
   .recomend th:nth-child(1),
   .recomend td:nth-child(1) {
     max-width: 90px;
@@ -158,6 +175,49 @@
     padding: 14px 9px;
   }
 }
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  .table {
+    width: 343px;
+  }
+
+  .dictionary th:nth-child(1),
+  .dictionary td:nth-child(1) {
+    width: 82px;
+  }
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 116px;
+  }
+  .dictionary th:nth-child(4),
+  .dictionary td:nth-child(4) {
+    width: 95px;
+  }
+  .dictionary th:nth-child(5),
+  .dictionary td:nth-child(5) {
+    width: 50px;
+  }
+
+  .recommendHeader,
+  .dictionaryHeader {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .recomend th:nth-child(1),
+  .recomend td:nth-child(1) {
+    width: 90px;
+  }
+  .recomend th:nth-child(3),
+  .recomend td:nth-child(3) {
+    width: 99px;
+  }
+  .recomend th:nth-child(4),
+  .recomend td:nth-child(4) {
+    width: 38px;
+    padding: 14px 9px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .filtersBlock {
     flex-direction: row;

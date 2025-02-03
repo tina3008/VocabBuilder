@@ -10,7 +10,6 @@
 font-family: "MacPaw Fixel Display";
 font-size: 13px;
 font-weight: 600;
-
 }
 .pageButton:active,
 .pageButton:hover,
@@ -35,6 +34,22 @@ background: #85AA9F;
 color: var(--fff);
 }
 
-.previousClassName{
+@media screen and (max-width: 320px){
+.paginationBlock{
+    column-gap: 6px;
+}
+.pagination{
+    column-gap: 6px;
+    max-width: 224px;
+}
+}
 
+@media screen and (min-width: 321px) and(max-width: 767px){
+.paginationBlock{
+    column-gap: 10px;
+}
+.pagination{
+    column-gap: 8px;
+    max-width: 242px;
+}
 }
