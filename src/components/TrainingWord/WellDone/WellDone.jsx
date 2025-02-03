@@ -3,7 +3,6 @@ import {
   selectActiveModal,
   selectModalData,
 } from "../../../redux/modal/selectors";
-import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { closeModal, setModalData } from "../../../redux/modal/slice";
 import Modal from "react-modal";

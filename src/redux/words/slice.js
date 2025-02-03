@@ -12,7 +12,11 @@ import {
   fetchWordById,
   fetchAllOwnWords,
 } from "./operations";
-import { selectWords, selectFilter, selectTasks } from "./selectors";
+import {
+  selectFilter,
+  selectDictionaryWords,
+  selectRecomendWords,
+} from "./selectors";
 
 import { logOut } from "../auth/operations";
 const wordsSlice = createSlice({
@@ -234,15 +238,51 @@ const wordsSlice = createSlice({
   },
 });
 
+export const memoWordsSelector = () =>
+  createSelector(
+    [
+      (state, pageType) => {
+        if (pageType === "recommend") {
+          return selectRecomendWords(state) || [];
+        }
+        if (pageType === "dictionary") {
+          return selectDictionaryWords(state) || [];
+        }
+        return [];
+      },
+      selectFilter,
+    ],
+    (words, filters) => {
+      const { word, category, isIrregular } = filters.values;
+
+      return words.filter((wordItem) => {
+        const matchesWord = word
+          ? wordItem.en?.toLowerCase().includes(word.trim().toLowerCase())
+          : true;
+
+        const matchesCategory = category
+          ? wordItem.category === category
+          : true;
+
+        const matchesVerbType =
+          category === "verb" && isIrregular
+            ? wordItem.isIrregular === isIrregular
+            : true;
+
+        return matchesWord && matchesCategory && matchesVerbType;
+      });
+    }
+  );
+
 export const visibleWords = (pageType) =>
   createSelector(
     [
       (state) => {
         if (pageType === "recommend") {
-          return state.words.recommendPage?.items || [];
+          return selectRecomendWords || [];
         }
         if (pageType === "dictionary") {
-          return state.words.dictionaryPage?.items || [];
+          return selectDictionaryWords || [];
         }
         return [];
       },

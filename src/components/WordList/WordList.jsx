@@ -8,7 +8,8 @@ import { selectedWord } from "../../redux/words/selectors";
 import AddDeleteModal from "../AddDeleteModal/AddDeleteModal";
 import { setSelectedWord } from "../../redux/words/slice";
 import { addWordId } from "../../redux/words/operations";
-import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import { showSuccess, showError } from "../ToastComponent/ToastComponent";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -35,28 +36,11 @@ export default function WordList({ filtrWords }) {
     dispatch(addWordId(wordToSelect._id))
       .unwrap()
       .then(() => {
-        toast("The word has been added", {
-          style: {
-            background: "var(--white)",
-            color: "var(---color_success)",
-          },
-          position: "top-center",
-        });
-        handleClose();
+        showSuccess({message:"The word has been added"});      
+
       })
       .catch(() => {
-        toast("Was error, please try again", {
-          style: {
-            background: "var(--color_error)",
-            color: "var(--white)",
-          },
-          containerStyle: {
-            top: 150,
-            left: 20,
-            bottom: 20,
-            right: 20,
-          },
-        });
+        showError({ message: "Was error, please try again" });      
       });
   };
 
@@ -212,6 +196,7 @@ export default function WordList({ filtrWords }) {
           ))}
         </tbody>
       </table>
+      <Toaster />
       {activeModal === "addDelModal" && wordToChange && (
         <AddDeleteModal wordToChange={wordToChange} />
       )}

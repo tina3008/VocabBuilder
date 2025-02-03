@@ -8,6 +8,7 @@ import PasswordField from "./PasswordField/PasswordField";
 import { NavLink } from "react-router-dom";
 import CustomMessage from "./CustomMessage/CustomMessage";
 import { useNavigate } from "react-router-dom";
+import { showSuccess, showError } from "../ToastComponent/ToastComponent.jsx";
 
 const validationControl = Yup.object().shape({
   name: Yup.string()
@@ -35,21 +36,13 @@ export default function RegistrationForm() {
   const handleSubmit = (values, actions) => {
     dispatch(register(values))
       .unwrap()
-      .then((data) => {
-        toast.success("Registration successful!", {
-          style: { background: "white", color: "black" },
-          position: "top-center",
-        });
+      .then((data) => {      
+         showSuccess({ message: "Registration successful!" });
         actions.resetForm();
         navigate("/dictionary");
       })
       .catch((err) => {
-        toast(`Registration failed: ${err.toString()}`, {
-          style: { background: "red" },
-          containerStyle: {
-            position: "top-center",
-          },
-        });
+           showError({ message: `Registration failed: ${err.toString()}` });      
       });
   };
 

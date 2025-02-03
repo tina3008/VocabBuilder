@@ -4,10 +4,11 @@ import * as Yup from "yup";
 import { closeModal } from "../../redux/modal/slice";
 import { changeWord } from "../../redux/words/operations";
 import { selectActiveModal } from "../../redux/modal/selectors";
-import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import Modal from "react-modal";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect } from "react";
+import { showSuccess, showError } from "../ToastComponent/ToastComponent";
 
 const customStyles = {
   overlay: {
@@ -64,28 +65,11 @@ const handleSubmit = (values, actions) => {
   const { en, ua } = values;
   dispatch(changeWord({ id, en, ua, category, isIrregular }))
     .unwrap()
-    .then(() => {
-      toast("The word has been changed", {
-        style: {
-          background: "var(--white)",
-          color: "var(---color_success)",
-        },
-        position: "top-center",
-      });
+    .then(() => {     
+      showSuccess({ message: "The word has been changed" });
     })
     .catch(() => {
-      toast("Was error, please try again", {
-        style: {
-          background: "var(--color_error)",
-          color: "var(--white)",
-        },
-        containerStyle: {
-          top: 150,
-          left: 20,
-          bottom: 20,
-          right: 20,
-        },
-      });
+     showError({ message: "Was error, please try again" });
     });
 
   actions.resetForm();
@@ -167,6 +151,7 @@ const handleSubmit = (values, actions) => {
                 Cancel
               </button>
             </div>
+            <Toaster />
           </Form>
         </Formik>
 

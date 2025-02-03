@@ -1,16 +1,17 @@
 import css from "../RegistrationForm/RegistrationForm.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { login } from "../../redux/auth/operations.js";
 import { useDispatch } from "react-redux";
 import PasswordField from "../RegistrationForm/PasswordField/PasswordField";
 import CustomMessage from "../RegistrationForm/CustomMessage/CustomMessage";
 import * as Yup from "yup";
+import { showSuccess, showError } from "../ToastComponent/ToastComponent.jsx";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const validationControl = Yup.object().shape({
     email: Yup.string()
       .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, "Invalid email format")
@@ -28,25 +29,15 @@ export default function LoginForm() {
   });
 
   const handleSubmit = (values, actions) => {
-
     dispatch(login(values))
       .unwrap()
       .then((data) => {
-        toast.success("Login successful!", {
-          style: { background: "white", color: "black" },
-          position: "top-center",
-        });
+        showSuccess({ message: "Login successful!" });
         actions.resetForm();
         navigate("/dictionary");
       })
       .catch((err) => {
-        toast(`Login failed: ${err.toString()}`, {
-          style: { background: "red" },
-          containerStyle: {
-            position: "top-center",
-          },
-        });
-        console.log("send err,", err);
+        showError({ message: `Login failed: ${err.toString()}`});
       });
   };
 

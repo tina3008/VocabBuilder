@@ -14,7 +14,8 @@ import {
   selectWord,
   selectAnswers,
 } from "../../redux/words/selectors";
-import toast, { Toaster } from "react-hot-toast";
+import  { Toaster } from "react-hot-toast";
+import { showInfo, showError } from "../ToastComponent/ToastComponent.jsx";
 import { validationControl } from "../AddWord/AddWord";
 import { openModal, setModalData } from "../../redux/modal/slice";
 import { selectActiveModal } from "../../redux/modal/selectors";
@@ -72,28 +73,14 @@ export default function TrainingWordId() {
         Math.round(prevProgress + 100 / tasks.length)
       );
     } else {
-      toast.error("This is the last word", {
-        style: { background: "white", color: "black" },
-        position: "top-center",
-      });
+        showInfo({message:"This is the last word"});
     }
   };
 
   const handleSave = (values, actions) => {
     const updatedAnswers = [...answers, { ...word, ...values }];
     if (values.en == "" || values.ua == "") {
-      toast("Please input answer", {
-        style: {
-          background: "var(--color_error)",
-          color: "var(--white)",
-        },
-        containerStyle: {
-          top: 150,
-          left: 20,
-          bottom: 20,
-          right: 20,
-        },
-      });
+      showError({ message: "Please input answer" });      
     } else {
       dispatch(setSelectAnswers(updatedAnswers));
 
@@ -104,7 +91,7 @@ export default function TrainingWordId() {
           dispatch(setModalData(data));
         })
         .catch((err) => {
-          console.error("Failed to fetch words:", err);
+          showError({ message: `Failed to fetch words: ${err}` });       
         });
       if (actions) {
         actions.resetForm({

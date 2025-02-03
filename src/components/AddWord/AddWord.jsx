@@ -2,9 +2,9 @@
 import css from "./AddWord.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addWord, fetchCategories } from "../../redux/words/operations";
+import { addWord, fetchCategories, fetchWordsOwn } from "../../redux/words/operations";
 import { selectActiveModal } from "../../redux/modal/selectors";
-import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useId } from "react";
@@ -13,6 +13,7 @@ import { closeModal } from "../../redux/modal/slice";
 import Categories from "../Dashboard/Filters/Categories";
 import { CustomStylesAddWord } from "../Dashboard/Filters/CustomStylesAddWord";
 import Modal from "react-modal";
+import { showSuccess, showError } from "../ToastComponent/ToastComponent";
 
 const customStyles = {
   overlay: {
@@ -70,29 +71,13 @@ export default function AddWordModal() {
 
     dispatch(addWord(dataToSubmit))
       .unwrap()
-      .then(() => {
-        toast("The word has been added", {
-          style: {
-            background: "var(--white)",
-            color: "var(---color_success)",
-          },
-          position: "top-center",
-        });
+      .then(() => {   
+        showSuccess({message:"The word has been added"});
         handleClose();
+         dispatch(fetchWordsOwn());
       })
       .catch(() => {
-        toast("Was error, please try again", {
-          style: {
-            background: "var(--color_error)",
-            color: "var(--white)",
-          },
-          containerStyle: {
-            top: 150,
-            left: 20,
-            bottom: 20,
-            right: 20,
-          },
-        });
+        showError({message:"Was error, please try again"});
       });
 
     actions.resetForm();
@@ -193,6 +178,7 @@ export default function AddWordModal() {
                 Cancel
               </button>
             </div>
+            <Toaster />
           </Form>
         </Formik>
         <button onClick={handleClose} className={css.btnX}>

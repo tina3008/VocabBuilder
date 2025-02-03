@@ -6,8 +6,10 @@ import css from "./AddDeleteModal.module.css";
 import { useDispatch } from "react-redux";
 import { deleteWord } from "../../redux/words/operations";
 import toast from "react-hot-toast";
-
-import {selectWords} from "../../redux/words/selectors.js";
+import { selectWords } from "../../redux/words/selectors.js";
+import { visibleWords } from "../../redux/words/slice.js";
+import { showError, showSuccess } from "../ToastComponent/ToastComponent.jsx";
+import { closeModal } from "../../redux/modal/slice.js";
 
 const adjustPosition = (position, direction) => {
   const padding = 10;
@@ -44,50 +46,36 @@ export default function AddDeleteModal({ wordToChange }) {
     },
   };
   Modal.setAppElement("#root");
-  
 
   const { showModal, hideModal, isActive } = useModalControl();
 
   const handleEdit = () => {
-    // hideModal();
     showModal("changeModal");
   };
-
-// console.log("wordToChange.id-", wordToChange._id);
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
-    dispatch(deleteWord(wordToChange._id))
-      .unwrap()
-      .then(() => {  
-        dispatch(visibleWords()); 
-        toast("The word has been deleted", {
-          style: {
-            background: "var(--white)",
-            color: "var(---color_success)",
-          },
-          position: "top-center",
-        });
-        handleClose();
-      })
-      .catch(() => {
-        toast("Was error, please try again", {
-          style: {
-            background: "var(--color_error)",
-            color: "var(--white)",
-          },
-          containerStyle: {
-            top: 150,
-            left: 20,
-            bottom: 20,
-            right: 20,
-          },
-        });
-      });
+  const handleClose = () => {
+      dispatch(closeModal());
+    };
+ 
+const handleDelete = () => {
+  if (!wordToChange?._id) {
+    showError({ message: "Invalid word ID" });
+    return;
+  }
 
-   hideModal();
-  };
-
+  dispatch(deleteWord(wordToChange._id))
+    .unwrap()
+    .then(() => {
+      showSuccess({ message: "The word has been deleted" });
+      closeModal();
+      hideModal();
+    })
+    .catch((err) => {
+      console.error("Delete error:", err);
+      showError({ message: "There was an error, please try again" });
+    });
+};
   return (
     <>
       {isActive("addDelModal") && (

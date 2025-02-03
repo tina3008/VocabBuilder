@@ -1,15 +1,13 @@
-import { Link } from "react-router-dom";
 import css from "./DictionaryPage.module.css";
 import { fetchWordsOwn } from "../../redux/words/operations";
 import { useDispatch, useSelector } from "react-redux";
-import { visibleWords } from "../../redux/words/slice";
+import { visibleWords, memoWordsSelector } from "../../redux/words/slice";
 import {
+  selectDictionaryWords,
   selectError,
   selectLoading,
-
 } from "../../redux/words/selectors";
-import { useEffect, useState } from "react";
-
+import { useEffect, useState, useMemo } from "react";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loader from "../../components/Loader/Loader";
 import WordList from "../../components/WordList/WordList";
@@ -21,19 +19,28 @@ export default function DictionaryPage() {
   const isLoading = useSelector(selectLoading);
   const isError = useSelector(selectError);
 
-    const items = useSelector((state) => state.words.dictionaryPage?.items);
-  useEffect(() => {
-    dispatch(fetchWordsOwn());
-  }, [dispatch]);
+  const items = useSelector(selectDictionaryWords);
+   const visibleWordsSelector = useMemo(memoWordsSelector, []);
 
-  const allList = useSelector(visibleWords("dictionary"));  
-  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
+   const allList = useSelector((state) =>
+     visibleWordsSelector(state, "dictionary")
+   );
 
-  const handleLoadMore = () => {
-    setVisibleCount((prevCount) => prevCount + ITEMS_PER_LOAD);
-  };
+   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
 
-  const currentWords = allList.slice(0, visibleCount);
+   useEffect(() => {
+     dispatch(fetchWordsOwn());
+   }, [dispatch]);
+
+   useEffect(() => {
+     setVisibleCount(ITEMS_PER_LOAD);
+   }, [allList]); 
+
+   const handleLoadMore = () => {
+     setVisibleCount((prevCount) => prevCount + ITEMS_PER_LOAD);
+   };
+
+   const currentWords = allList.slice(0, visibleCount);
 
   return (
     <>

@@ -17,8 +17,7 @@ export default function Statistics() {
   const statistics = useSelector(selectStatistics);
   const activeModal = useSelector(selectActiveModal);
 
-  const handleEdit = () => {
-    // hideModal();
+  const handleEdit = () => { 
     if (activeModal !== "addWordModal") {
       showModal("addWordModal");
     }

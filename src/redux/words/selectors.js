@@ -1,5 +1,7 @@
 export const selectWords = (state) => state.words.recommendPage;
 export const selectWord = (state) => state.words.item;
+export const selectDictionaryWords = (state) => state.words.dictionaryPage?.items;
+export const selectRecomendWords = (state) => state.words.recommendPage?.items;
 export const state = (state) => state;
 
 export const selectLoading = (state) => state.words.isLoading;
