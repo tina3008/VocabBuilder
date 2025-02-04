@@ -1,23 +1,37 @@
 import { NavLink } from "react-router-dom";
 import css from "./BurderMenue.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedin } from "../../redux/auth/selectors";
-import AuthFound from '../Navigation/AuthFound/AuthFound'
+import AuthFound from "../Navigation/AuthFound/AuthFound";
 import { logOut } from "../../redux/auth/operations";
 
 export default function BurderMenue({ closeMenu }) {
-
-   const [menuOpen, setMenuOpen] = useState(false);
-   const dispatch = useDispatch();
-  
+  const [menuOpen, setMenuOpen] = useState(false);
+  const dispatch = useDispatch();
   const isLoggedin = useSelector(selectIsLoggedin);
 
- 
   const handleLogout = () => {
     dispatch(logOut());
     closeMenu(!closeMenu);
   };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1440px)");
+
+    const handleResize = () => {
+      if (mediaQuery.matches) {
+        closeMenu();
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleResize);
+    handleResize(); 
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, [closeMenu]);
 
   return (
     <div className={css.burgerMenue}>
@@ -55,11 +69,7 @@ export default function BurderMenue({ closeMenu }) {
         </li>
       </ul>
       <div className={css.imgBlock}>
-        <img
-          src="/public/home.png"
-          alt="study people image"
-          className={css.img}
-        />
+        <img src="/home.png" alt="study people image" className={css.img} />
       </div>
     </div>
   );

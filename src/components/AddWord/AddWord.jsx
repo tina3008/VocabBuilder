@@ -2,7 +2,7 @@
 import css from "./AddWord.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addWord, fetchCategories, fetchWordsOwn } from "../../redux/words/operations";
+import { addWord, fetchWordsOwn } from "../../redux/words/operations";
 import { selectActiveModal } from "../../redux/modal/selectors";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";

@@ -1,4 +1,3 @@
-import css from "./DictionaryPage.module.css";
 import { fetchWordsOwn } from "../../redux/words/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { visibleWords, memoWordsSelector } from "../../redux/words/slice";
@@ -45,13 +44,13 @@ export default function DictionaryPage() {
   return (
     <>
       <PageCower>
-        <div className={css.wordList}>
+        <>
           {currentWords.length > 0 ? (
             <WordList filtrWords={currentWords} />
           ) : (
             <p>No words found</p>
           )}
-        </div>
+        </>
 
         {isLoading && <Loader>Loading message</Loader>}
         {isError && <ErrorMessage />}

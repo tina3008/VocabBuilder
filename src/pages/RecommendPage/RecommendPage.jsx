@@ -1,4 +1,3 @@
-import css from "./RecommendPage.module.css";
 import { allWords } from "../../redux/words/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { memoWordsSelector, visibleWords } from "../../redux/words/slice";
@@ -43,13 +42,13 @@ export default function RecommendPage() {
   return (
     <>
       <PageCower>
-        <div className={css.wordList}>          
+        <>          
           {currentWords.length > 0 ? (
             <WordList filtrWords={currentWords} />
           ) : (
             <p>No words found</p>
           )}
-        </div>
+        </>
 
         {isLoading && <Loader>Loading message</Loader>}
         {isError && <ErrorMessage />}

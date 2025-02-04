@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { openModal, closeModal } from "../../redux/modal/slice";
-import { selectActiveModal } from "../../redux/modal/selectors";
+import { openModal, closeModal } from "../redux/modal/slice";
+import { selectActiveModal } from "../redux/modal/selectors";
 
 export function useModalControl() {
   const dispatch = useDispatch();

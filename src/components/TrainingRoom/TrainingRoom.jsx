@@ -24,7 +24,7 @@ export default function TrainingRoom() {
 
     const timer = setTimeout(() => {
       setShowEmpty(true);
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [dispatch]);

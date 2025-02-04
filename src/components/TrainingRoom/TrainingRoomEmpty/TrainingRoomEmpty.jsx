@@ -1,9 +1,8 @@
 import css from "./TrainingRoomEmpty.module.css";
-import { useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import AddWordModal from "../../AddWord/AddWord";
 import { selectActiveModal } from "../../../redux/modal/selectors";
-import { useModalControl } from "../../hook/UseModalControl";
+import { useModalControl } from "../../../hook/UseModalControl";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function TrainingRoomEmpty() {
@@ -37,7 +36,7 @@ export default function TrainingRoomEmpty() {
         <div className={css.btnBlock}>
           <button className={css.btnAdd} onClick={handleAddWord}>
             Add word
-          </button>        
+          </button>
           <NavLink to="/recommend" className={css.btnCancel}>
             Cancel
           </NavLink>

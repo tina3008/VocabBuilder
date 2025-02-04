@@ -47,6 +47,7 @@
   }
 
   .registerImg {
+    z-index: -1;
   }
 }
 

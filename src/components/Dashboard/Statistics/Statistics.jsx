@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import AddWordModal from "../../AddWord/AddWord";
 import { selectActiveModal } from "../../../redux/modal/selectors";
 import ChangeWordModal from "../../AddWord/ChangeWordModal";
-import { useModalControl } from "../../hook/UseModalControl";
+import { useModalControl } from "../../../hook/UseModalControl";
 
 export default function Statistics() {
   const wordToChange = useSelector(selectedWord);
@@ -17,7 +17,7 @@ export default function Statistics() {
   const statistics = useSelector(selectStatistics);
   const activeModal = useSelector(selectActiveModal);
 
-  const handleEdit = () => { 
+  const handleEdit = () => {
     if (activeModal !== "addWordModal") {
       showModal("addWordModal");
     }

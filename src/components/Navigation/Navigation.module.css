@@ -17,14 +17,7 @@
   justify-content: space-between;
   align-items: center;
 }
-/* .fixedWrapper {
-  position: fixed;
-  background: var(--text-color-white);
-  z-index: 1000;
-  width: 320px;
-  align-items: center;
-  justify-content: space-between;
-} */
+
 .logo {
   display: inline-flex;
   column-gap: 8px;
@@ -116,13 +109,7 @@ align-items: center;
     stroke: var(--text-color-main);
     background-color: transparent;
   }
-   .xImage {
-    stroke: var(--text-color-main);
-    background-color: aqua;
-    fill: black;
-    color: blue;
-   
-  }
+
 @media screen and (max-width: 767px) {
   .no-scroll {
     overflow: hidden;

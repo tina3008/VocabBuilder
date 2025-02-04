@@ -1,5 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import { PrivateRoute, RestrictedRoute } from "../Navigation/RestrictedRoute.jsx";
+import {
+  PrivateRoute,
+  RestrictedRoute,
+} from "../Navigation/RestrictedRoute.jsx";
 import { lazy, Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navigation from "../Navigation/Navigation.jsx";
@@ -42,7 +45,6 @@ export default function App() {
   if (isRefreshing) {
     return null;
   }
-  // const isRegisterPage = location.pathname === "/register" || "/login";
 
   return (
     <div>
@@ -113,8 +115,8 @@ export default function App() {
               }
             />
 
-            <Route path="/training/:id" element={<TrainingWordId />}/>
-             
+            <Route path="/training/:id" element={<TrainingWordId />} />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

@@ -1,5 +1,5 @@
 import css from "./RegistrationForm.module.css";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { register } from "../../redux/auth/operations";

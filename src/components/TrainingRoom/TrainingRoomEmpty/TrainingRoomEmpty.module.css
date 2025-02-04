@@ -109,6 +109,7 @@ height: 202px;
   }
   .textPart {
     width: 581px;
+    margin: 0 auto;
   }
 
   .btnBlock {
@@ -155,4 +156,8 @@ color: var(--white);
         height: 289px;
         display: flex;
     }
+     .textPart {
+
+    margin: 0;
+  }
 }

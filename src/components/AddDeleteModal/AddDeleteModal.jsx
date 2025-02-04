@@ -1,13 +1,10 @@
 import React from "react";
 import Modal from "react-modal";
-import { useModalControl } from "../hook/UseModalControl";
+import { useModalControl } from "../../hook/UseModalControl.jsx";
 import ChangeWordModal from "../AddWord/ChangeWordModal";
 import css from "./AddDeleteModal.module.css";
 import { useDispatch } from "react-redux";
-import { deleteWord } from "../../redux/words/operations";
-import toast from "react-hot-toast";
-import { selectWords } from "../../redux/words/selectors.js";
-import { visibleWords } from "../../redux/words/slice.js";
+import { deleteWord, fetchWordsOwn } from "../../redux/words/operations";
 import { showError, showSuccess } from "../ToastComponent/ToastComponent.jsx";
 import { closeModal } from "../../redux/modal/slice.js";
 
@@ -55,27 +52,28 @@ export default function AddDeleteModal({ wordToChange }) {
   const dispatch = useDispatch();
 
   const handleClose = () => {
-      dispatch(closeModal());
-    };
- 
-const handleDelete = () => {
-  if (!wordToChange?._id) {
-    showError({ message: "Invalid word ID" });
-    return;
-  }
+    dispatch(closeModal());
+  };
 
-  dispatch(deleteWord(wordToChange._id))
-    .unwrap()
-    .then(() => {
-      showSuccess({ message: "The word has been deleted" });
-      closeModal();
-      hideModal();
-    })
-    .catch((err) => {
-      console.error("Delete error:", err);
-      showError({ message: "There was an error, please try again" });
-    });
-};
+  const handleDelete = () => {
+    if (!wordToChange?._id) {
+      showError({ message: "Invalid word ID" });
+      return;
+    }
+
+    dispatch(deleteWord(wordToChange._id))
+      .unwrap()
+      .then(() => {
+        showSuccess({ message: "The word has been deleted" });
+        closeModal();
+        hideModal();
+        dispatch(fetchWordsOwn());
+      })
+      .catch((err) => {
+        console.error("Delete error:", err);
+        showError({ message: "There was an error, please try again" });
+      });
+  };
   return (
     <>
       {isActive("addDelModal") && (
