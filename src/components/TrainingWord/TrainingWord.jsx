@@ -81,12 +81,13 @@ export default function TrainingWordId() {
     }
   };
 
+  
   const handleSave = (values, actions) => {
     const lowCaceValue = {
       en: values.en.trim().toLowerCase(),
       ua: values.ua.trim().toLowerCase(),
     };
-    const updatedAnswers = [...answers, { ...word, ...lowCaceValue }];
+    let updatedAnswers = [...answers, { ...word, ...lowCaceValue }];
 
     if (values.en == "" || values.ua == "") {
       showError({ message: "Please input answer" });
@@ -98,10 +99,14 @@ export default function TrainingWordId() {
         .then((data) => {
           dispatch(openModal("wellDone"));
           dispatch(setModalData(data));
+
+          updatedAnswers = [];
+          dispatch(setSelectAnswers([]));
         })
         .catch((err) => {
           showError({ message: `Failed to fetch words: ${err}` });
         });
+
       if (actions) {
         actions.resetForm({
           values: {
