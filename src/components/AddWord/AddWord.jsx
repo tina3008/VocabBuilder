@@ -64,7 +64,12 @@ export default function AddWordModal() {
   };
 
   const handleSubmit = (values, actions) => {
-    const dataToSubmit = { ...values };
+      const dataToSubmit = {
+        ...values,
+        ua: values.ua.trim().toLowerCase(),
+        en: values.en.trim().toLowerCase(),
+        category: values.category,
+      };
     if (dataToSubmit.category !== "verb") {
       delete dataToSubmit.isIrregular;  
     }

@@ -166,7 +166,7 @@ const wordsSlice = createSlice({
       })
       .addCase(addWordId.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = action.payload;        
       })
 
       .addCase(deleteWord.pending, (state) => {

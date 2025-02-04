@@ -14,7 +14,7 @@ import {
   selectWord,
   selectAnswers,
 } from "../../redux/words/selectors";
-import  { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { showInfo, showError } from "../ToastComponent/ToastComponent.jsx";
 import { validationControl } from "../AddWord/AddWord";
 import { openModal, setModalData } from "../../redux/modal/slice";
@@ -57,7 +57,11 @@ export default function TrainingWordId() {
   const { _id, en, ua, task } = word;
 
   const handleSubmit = (values, actions) => {
-    const updatedAnswers = [...answers, { ...word, ...values }];
+    const lowCaceValue = {
+      en: values.en.trim().toLowerCase(),
+      ua: values.ua.trim().toLowerCase(),
+    };
+    const updatedAnswers = [...answers, { ...word, ...lowCaceValue }];
     dispatch(setSelectAnswers(updatedAnswers));
     if (currentIndex + 1 < tasks.length) {
       const nextWord = tasks[currentIndex + 1];
@@ -73,14 +77,18 @@ export default function TrainingWordId() {
         Math.round(prevProgress + 100 / tasks.length)
       );
     } else {
-        showInfo({message:"This is the last word"});
+      showInfo({ message: "This is the last word" });
     }
   };
 
   const handleSave = (values, actions) => {
-    const updatedAnswers = [...answers, { ...word, ...values }];
+    const lowCaceValue = {
+      en: values.en.trim().toLowerCase(),
+      ua: values.ua.trim().toLowerCase(),
+    };
+    const updatedAnswers = [...answers, { ...word, ...lowCaceValue }];
     if (values.en == "" || values.ua == "") {
-      showError({ message: "Please input answer" });      
+      showError({ message: "Please input answer" });
     } else {
       dispatch(setSelectAnswers(updatedAnswers));
 
@@ -91,7 +99,7 @@ export default function TrainingWordId() {
           dispatch(setModalData(data));
         })
         .catch((err) => {
-          showError({ message: `Failed to fetch words: ${err}` });       
+          showError({ message: `Failed to fetch words: ${err}` });
         });
       if (actions) {
         actions.resetForm({
