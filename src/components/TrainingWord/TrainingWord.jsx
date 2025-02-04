@@ -87,6 +87,7 @@ export default function TrainingWordId() {
       ua: values.ua.trim().toLowerCase(),
     };
     const updatedAnswers = [...answers, { ...word, ...lowCaceValue }];
+
     if (values.en == "" || values.ua == "") {
       showError({ message: "Please input answer" });
     } else {

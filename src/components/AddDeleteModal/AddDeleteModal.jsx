@@ -61,13 +61,14 @@ export default function AddDeleteModal({ wordToChange }) {
       return;
     }
 
+     
     dispatch(deleteWord(wordToChange._id))
       .unwrap()
       .then(() => {
         showSuccess({ message: "The word has been deleted" });
         closeModal();
         hideModal();
-        dispatch(fetchWordsOwn());
+       dispatch(fetchWordsOwn());
       })
       .catch((err) => {
         console.error("Delete error:", err);

@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { closeModal, setModalData } from "../../../redux/modal/slice";
 import Modal from "react-modal";
 import css from "./WellDone.module.css";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const customStyles = {
   overlay: {
@@ -36,14 +36,13 @@ export default function WellDone() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   const doneTrue = data.filter((item) => item.isDone === true);
   const doneFalse = data.filter((item) => item.isDone === false);
 
   const handleClose = () => {
     dispatch(closeModal());
     navigate("/dictionary");
- dispatch(setModalData(0));
+    dispatch(setModalData(0));
   };
 
   useEffect(() => {
@@ -75,13 +74,13 @@ export default function WellDone() {
           <div className={css.answer}>
             <h3 className={css.answerTitle}>Сorrect answers: </h3>
             <ul className={css.list}>
-              {doneTrue.map((item) =>
+              {doneTrue.map((item, index) =>
                 item.task === "en" ? (
-                  <li key={item._id} className={css.wordList}>
+                  <li key={index} className={css.wordList}>
                     {item.en}
                   </li>
                 ) : (
-                  <li key={item._id} className={css.wordList}>
+                  <li key={index} className={css.wordList}>
                     {item.ua}
                   </li>
                 )
@@ -91,13 +90,13 @@ export default function WellDone() {
           <div className={css.answer}>
             <h3 className={css.answerTitle}>Mistakes:</h3>
             <ul className={css.list}>
-              {doneFalse.map((item) =>
+              {doneFalse.map((item, index) =>
                 item.task === "en" ? (
-                  <li key={item._id} className={css.wordList}>
+                  <li key={index} className={css.wordList}>
                     {item.en}
                   </li>
                 ) : (
-                  <li key={item._id} className={css.wordList}>
+                  <li key={index} className={css.wordList}>
                     {item.ua}
                   </li>
                 )

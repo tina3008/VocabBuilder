@@ -30,7 +30,7 @@ export const fetchWordsOwn = createAsyncThunk(
   "words/fetchOwn",
   async (page = 1, thunkAPI) => {
     try {
-      const response = await axios.get(`/words/own?page=${page}`);
+      const response = await axios.get(`/words/own?page=${page}`);      
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

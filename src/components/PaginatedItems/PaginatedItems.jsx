@@ -13,13 +13,15 @@ export const PaginatedItems = ({
   const [page, setPage] = useState(currentPage - 1);
   const [pageRange, setPageRange] = useState(3);
   useEffect(() => {
+
+    
     if (currentPage !== page + 1) {
       dispatch(fetchAction(page + 1));
     }
   }, [page, dispatch, fetchAction, currentPage]);
 
-  const handlePageClick = ({ selected }) => {
-    setPage(selected);
+  const handlePageClick = ({ selected }) => {    
+    setPage(selected) ;
   };
 
   const pageCount = totalPage || 1;

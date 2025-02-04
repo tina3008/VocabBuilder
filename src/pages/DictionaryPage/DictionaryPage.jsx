@@ -19,28 +19,27 @@ export default function DictionaryPage() {
   const isError = useSelector(selectError);
 
   const items = useSelector(selectDictionaryWords);
-   const visibleWordsSelector = useMemo(memoWordsSelector, []);
+  const visibleWordsSelector = useMemo(() => memoWordsSelector(), []);
 
-   const allList = useSelector((state) =>
-     visibleWordsSelector(state, "dictionary")
-   );
+  const allList = useSelector((state) =>
+    visibleWordsSelector(state, "dictionary")
+  );
 
-   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
 
-   useEffect(() => {
-     dispatch(fetchWordsOwn());
-   }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchWordsOwn());
+  }, [dispatch]);
 
-   useEffect(() => {
-     setVisibleCount(ITEMS_PER_LOAD);
-   }, [allList]); 
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_LOAD);
+  }, [allList]);
 
-   const handleLoadMore = () => {
-     setVisibleCount((prevCount) => prevCount + ITEMS_PER_LOAD);
-   };
+  const handleLoadMore = () => {
+    setVisibleCount((prevCount) => prevCount + ITEMS_PER_LOAD);
+  };
 
-   const currentWords = allList.slice(0, visibleCount);
-
+  const currentWords = allList.slice(0, visibleCount);
   return (
     <>
       <PageCower>
