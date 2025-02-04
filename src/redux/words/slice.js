@@ -228,8 +228,6 @@ const wordsSlice = createSlice({
         state.item = action.payload.find(
           (word) => word._id === state.selectWord
         );
-        console.log("Selected word ID:", state.selectWord);
-        console.log("Selected word object:", state.item);
       })
       .addCase(fetchAllOwnWords.rejected, (state, action) => {
         state.isLoading = false;

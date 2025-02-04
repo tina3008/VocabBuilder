@@ -7,7 +7,6 @@ const modalSlice = createSlice({
   },
   reducers: {
     openModal: (state, action) => {
-      console.log("Opening modal:", action.payload);
       state.activeModal = action.payload;
     },
     closeModal: (state) => {

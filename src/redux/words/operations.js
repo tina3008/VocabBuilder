@@ -128,11 +128,9 @@ export const fetchTasks = createAsyncThunk(
 export const fetchAnswers = createAsyncThunk(
   "words/answers",
   async (word, thunkAPI) => {
-
     try {
       const response = await axios.post("/words/answers", word);
-      console.log("response.data", response.data);
-      
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
