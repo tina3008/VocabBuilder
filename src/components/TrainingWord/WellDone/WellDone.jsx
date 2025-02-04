@@ -38,7 +38,8 @@ export default function WellDone() {
 
   const doneTrue = data.filter((item) => item.isDone === true);
   const doneFalse = data.filter((item) => item.isDone === false);
-
+console.log("doneTrue", doneTrue);
+console.log("doneFalse", doneFalse);
   const handleClose = () => {
     dispatch(closeModal());
     navigate("/dictionary");
