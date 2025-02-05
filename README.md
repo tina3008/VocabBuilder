@@ -1,20 +1,18 @@
-# Learn Lingo
+# VocabBuilder
 
-Learn Lingo is a web app for those who want to find a foreign language teacher. The web app allows users to browse, filter and add teachers to their favorites.
+VocabBuilder is a web app dictionary for those who want study Eanglish. The web app allows users to browse, filter, add delete and change words from dictionary.
 
 ## Features
 
-- Browse a catalog of teachers
-- Filter teachers by languages, price, and levels
-- Add teachers  to favorites
-- View detailed information, images, and reviews for each teachers 
-- Book trial lesson through a convenient form
+- Browse a catalog of words
+- Filter words by type and letters
+- Add words  to dictionary
+- Repeat learn selected words by write
 
 ## Pages
 
- **Home**: Landing page with an introduction to the service
- **Teachers**: Main page for browsing and filtering teachers
- **Favorite**: Page with favorite teachers
+ **Recommend**: Page with recommended words to study
+ **Dictionary**: Page with selected words to study
  **NotFound**: Not found page
 
 ## Technologies Used
